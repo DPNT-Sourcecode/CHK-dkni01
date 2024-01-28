@@ -2,7 +2,6 @@ package solutions.CHK
 
 object CheckoutSolution {
     fun checkout(skus: String): Int {
-//        val checkInvalid = skus.filter { !listOf('A', 'B', 'C', 'D').contains(it) }
         if (skus.any { !listOf('A', 'B', 'C', 'D').contains(it) }) {
             return -1
         }
@@ -23,3 +22,4 @@ object CheckoutSolution {
 //        return -1
     }
 }
+

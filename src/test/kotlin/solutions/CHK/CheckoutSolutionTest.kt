@@ -15,7 +15,8 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(15, CheckoutSolution.checkout("D"))
         Assertions.assertEquals(145, CheckoutSolution.checkout("ABCDDD"))
 
-//        Assertions.assertEquals(130, CheckoutSolution.checkout("AAA"))
+        Assertions.assertEquals(180, CheckoutSolution.checkout("AAAA"))
+        Assertions.assertEquals(260, CheckoutSolution.checkout("AAAAAA"))
 //        Assertions.assertEquals(45, CheckoutSolution.checkout("BB"))
 //        
         Assertions.assertEquals(-1, CheckoutSolution.checkout("X"))
@@ -24,3 +25,4 @@ class CheckoutSolutionTest {
 
     
 }
+
