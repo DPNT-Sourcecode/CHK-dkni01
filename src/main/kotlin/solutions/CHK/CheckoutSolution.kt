@@ -51,32 +51,26 @@ object CheckoutSolution {
         // NB some basic affected by offers
 
         // calculating BOGOF (same product)
-        
-        val offerF = calculateOffer(
-            prices.getValue("F"),
-            skus.count { it == 'F' } * prices.getValue("F"),
-            3,
-            1
-        )
-        val totalF = (skus.count { it == 'F' } * prices.getValue("F")) -
-                (offerF.first * prices.getValue("F"))
-
-        
         totalPrice += calculateBogofSameOffer(
             "F",
-            skus.count { it == 'F' } * prices.getValue("F"),
+            skus.count { it == 'F' },
             3
         )
-
-        val offerU = calculateOffer(
-            prices.getValue("U"),
-            skus.count { it == 'U' } * prices.getValue("U"),
-            4,
-            1
+        totalPrice += calculateBogofSameOffer(
+            "U",
+            skus.count { it == 'U' },
+            4
         )
-        val totalU = (skus.count { it == 'U' } * prices.getValue("U")) -
-                (offerU.first * prices.getValue("U"))
-        totalPrice += totalU
+
+//        val offerU = calculateOffer(
+//            prices.getValue("U"),
+//            skus.count { it == 'U' } * prices.getValue("U"),
+//            4,
+//            1
+//        )
+//        val totalU = (skus.count { it == 'U' } * prices.getValue("U")) -
+//                (offerU.first * prices.getValue("U"))
+//        totalPrice += totalU
         
         // calculating basic products (no special offers)
         for (sku in "CDGIJLMOSTWXYZ") {
@@ -86,46 +80,46 @@ object CheckoutSolution {
         return totalPrice
 
         // calculating As
-        val offerA5 = calculateOffer(
-            prices.getValue("A"), 
-            skus.count { it == 'A' } * prices.getValue("A"), 
-            5,
-            A_OFFER5
-        )
-        val offerA3 = calculateOffer(
-            prices.getValue("A"),
-            offerA5.second,
-            3,
-            A_OFFER3
-        )
-        val totalA = offerA5.first + offerA3.first + offerA3.second
-
-        // calculating Es
-        val offerE = calculateOffer(
-            prices.getValue("E"),
-            skus.count { it == 'E' } * prices.getValue("E"),
-            2,
-            1
-        )
-        val adjustedBCount = skus.count { it == 'B' } - offerE.first
-        
-        // calculating Bs
-        val newB = calculateOffer(
-            prices.getValue("B"),
-            adjustedBCount * prices.getValue("B"),
-            2,
-            B_OFFER2
-        )
-        val totalB = newB.first + newB.second
-        
-        
-        
-        return totalA + 
-                (if (totalB <= 0) 0 else totalB) + 
-                (skus.count { it == 'C' } * prices.getValue("C")) + 
-                (skus.count { it == 'D' } * prices.getValue("D")) +
-                (skus.count { it == 'E' } * prices.getValue("E")) +
-                totalF
+//        val offerA5 = calculateOffer(
+//            prices.getValue("A"), 
+//            skus.count { it == 'A' } * prices.getValue("A"), 
+//            5,
+//            A_OFFER5
+//        )
+//        val offerA3 = calculateOffer(
+//            prices.getValue("A"),
+//            offerA5.second,
+//            3,
+//            A_OFFER3
+//        )
+//        val totalA = offerA5.first + offerA3.first + offerA3.second
+//
+//        // calculating Es
+//        val offerE = calculateOffer(
+//            prices.getValue("E"),
+//            skus.count { it == 'E' } * prices.getValue("E"),
+//            2,
+//            1
+//        )
+//        val adjustedBCount = skus.count { it == 'B' } - offerE.first
+//        
+//        // calculating Bs
+//        val newB = calculateOffer(
+//            prices.getValue("B"),
+//            adjustedBCount * prices.getValue("B"),
+//            2,
+//            B_OFFER2
+//        )
+//        val totalB = newB.first + newB.second
+//        
+//        
+//        
+//        return totalA + 
+//                (if (totalB <= 0) 0 else totalB) + 
+//                (skus.count { it == 'C' } * prices.getValue("C")) + 
+//                (skus.count { it == 'D' } * prices.getValue("D")) +
+//                (skus.count { it == 'E' } * prices.getValue("E")) +
+//                totalF
     }
     
     private fun calculateOffer(
@@ -134,6 +128,7 @@ object CheckoutSolution {
         multiplier: Int,
         offer: Int
     ) : Pair<Int, Int> {
+//        val totalNew = total * price
         val leftover = total % (price * multiplier)
         val reduced = ((total - leftover) / (price * multiplier)) * offer
         return Pair(reduced, leftover)
@@ -141,10 +136,11 @@ object CheckoutSolution {
     
     private fun calculateBogofSameOffer(
         sku: String,
-        total: Int,
+        numItems: Int,
         requiredItems: Int,
     ) : Int {
         val skuPrice = prices.getValue(sku)
+        val total = numItems * skuPrice
         val offerF = calculateOffer(
             skuPrice,
             total,
@@ -154,4 +150,5 @@ object CheckoutSolution {
         return total - (offerF.first * skuPrice)
     }
 }
+
 
