@@ -76,22 +76,10 @@ object CheckoutSolution {
 
         totalPrice += skus.count { it == 'E' } * prices.getValue("E")
         var adjustedSkus: String = removeFreeItems(skus, "E")
-        
-//        println("❗️ new skus list $adjustedSkus")
 
-//        // calculating Bs
-//        val newB = calculateOffer(
-//            prices.getValue("B"),
-//            adjustedBCount * prices.getValue("B"),
-//            2,
-//            45 // change this TODO
-//        )
-//        val totalB = newB.first + newB.second
-//        
-//        totalPrice += (if (totalB <= 0) 0 else totalB)
-        
-        
-        
+        totalPrice += skus.count { it == 'N' } * prices.getValue("N")
+        adjustedSkus = removeFreeItems(adjustedSkus, "N")
+
 
         // calculating get one free (same item)
         for (sku in "UF") {
@@ -115,34 +103,6 @@ object CheckoutSolution {
             totalPrice += adjustedSkus.count { it == sku } * prices.getValue(sku.toString())
         }
         return totalPrice
-        
-//
-//        // calculating Es
-//        val offerE = calculateOffer(
-//            prices.getValue("E"),
-//            skus.count { it == 'E' } * prices.getValue("E"),
-//            2,
-//            1
-//        )
-//        val adjustedBCount = skus.count { it == 'B' } - offerE.first
-//        
-//        // calculating Bs
-//        val newB = calculateOffer(
-//            prices.getValue("B"),
-//            adjustedBCount * prices.getValue("B"),
-//            2,
-//            B_OFFER2
-//        )
-//        val totalB = newB.first + newB.second
-//        
-//        
-//        
-//        return totalA + 
-//                (if (totalB <= 0) 0 else totalB) + 
-//                (skus.count { it == 'C' } * prices.getValue("C")) + 
-//                (skus.count { it == 'D' } * prices.getValue("D")) +
-//                (skus.count { it == 'E' } * prices.getValue("E")) +
-//                totalF
     }
     
     private fun calculateOffer(
@@ -216,15 +176,7 @@ object CheckoutSolution {
     ) : String {
         val skuPrice = prices.getValue(sku)
         val offerDetails = getOneFree[sku]
-
-//        val offerE = calculateOffer(
-//            prices.getValue("E"),
-//            skus.count { it == 'E' } * prices.getValue("E"),
-//            2,
-//            1
-//        )
-//        val adjustedBCount = skus.count { it == 'B' } - offerE.first
-
+        
         offerDetails?.let {
             val requiredItems = it.first
             val freeItemSku = it.second.first()
@@ -235,9 +187,7 @@ object CheckoutSolution {
                 1
             )
             
-//            val originalCountAssociatedItem = skus.count { char -> char == it.second.first() }
             val amountToSubtract = offer.first
-            
             return removeFreeItemsFromString(
                 skus,
                 freeItemSku,
@@ -265,4 +215,5 @@ object CheckoutSolution {
     }
 
 }
+
 

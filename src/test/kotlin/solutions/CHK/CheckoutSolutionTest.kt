@@ -70,7 +70,7 @@ class CheckoutSolutionTest {
 
 
     @Test
-    fun offerBAndE() {
+    fun offerGetDifferentOneFree() {
         Assertions.assertEquals(40, CheckoutSolution.checkout("E"))
         Assertions.assertEquals(80, CheckoutSolution.checkout("EE"))
         Assertions.assertEquals(80, CheckoutSolution.checkout("EEB"))
@@ -78,10 +78,21 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(160, CheckoutSolution.checkout("EEEEBB"))
         Assertions.assertEquals(160, CheckoutSolution.checkout("EEEEB"))
         Assertions.assertEquals(190, CheckoutSolution.checkout("EEEEBBB"))
+
+        Assertions.assertEquals(40, CheckoutSolution.checkout("N"))
+        Assertions.assertEquals(120, CheckoutSolution.checkout("NNN"))
+        Assertions.assertEquals(120, CheckoutSolution.checkout("NNNM"))
+        Assertions.assertEquals(110, CheckoutSolution.checkout("NNMM"))
+
+        Assertions.assertEquals(50, CheckoutSolution.checkout("R"))
+        Assertions.assertEquals(150, CheckoutSolution.checkout("RRR"))
+        Assertions.assertEquals(150, CheckoutSolution.checkout("RRRQ"))
+        Assertions.assertEquals(300, CheckoutSolution.checkout("RRRRRRQ"))
+        Assertions.assertEquals(330, CheckoutSolution.checkout("RRRRRRQQQ"))
     }
 
     @Test
-    fun offerGetOneSameFree() {
+    fun offerGetSameOneFree() {
         Assertions.assertEquals(10, CheckoutSolution.checkout("F"))
         Assertions.assertEquals(20, CheckoutSolution.checkout("FF"))
         Assertions.assertEquals(20, CheckoutSolution.checkout("FFF"))
@@ -96,3 +107,4 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(240, CheckoutSolution.checkout("UUUUUUUU"))
     }
 }
+
