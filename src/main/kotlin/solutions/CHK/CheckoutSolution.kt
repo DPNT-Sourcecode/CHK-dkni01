@@ -50,6 +50,17 @@ object CheckoutSolution {
         )
         val totalB = newB.first + newB.second
         
+        // calculating Fs
+
+        val offerF = calculateBasicOffer(
+            PRICE_F,
+            skus.count { it == 'F' } * PRICE_F,
+            3,
+            1
+        )
+        
+        val setsThreeF = offerF.first
+        
         return totalA + 
                 (if (totalB <= 0) 0 else totalB) + 
                 (skus.count { it == 'C' } * PRICE_C) + 
@@ -68,3 +79,4 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
