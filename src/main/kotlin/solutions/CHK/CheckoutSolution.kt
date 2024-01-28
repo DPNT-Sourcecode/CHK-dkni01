@@ -71,7 +71,6 @@ object CheckoutSolution {
         
         // calculating products with discounts for multiple of that item
         
-        // TODO after lunch refactor these to use the new hashmap
         
         totalPrice += calculateMultiplesOffer(
             "A",
@@ -157,15 +156,15 @@ object CheckoutSolution {
         numItems: Int
     ) : Int {
         val skuPrice = prices.getValue(sku)
-        val lowerOffer = multiplesOffers[sku]
-        val higherOffer = multiplesOffers[sku]
+        val lowerOffer = multiplesOffers[sku]?.first()
+        val higherOffer = multiplesOffers[sku]?.last()
         
         lowerOffer?.let {
             higherOffer?.let {
                 val highOffer = calculateOffer(
                     skuPrice,
                     numItems * skuPrice,
-                    higherOffer.first().first,
+                    higherOffer.first,
                     higherOffer.second
                 )
                 val lowOffer = calculateOffer(
@@ -185,31 +184,32 @@ object CheckoutSolution {
             return lowOffer.first + lowOffer.second
         }
         
-        higherOffer?.let {
-            val highOffer = calculateOffer(
-                skuPrice,
-                numItems * skuPrice,
-                higherOffer.first,
-                higherOffer.second
-            )
-            val lowOffer = calculateOffer(
-                skuPrice,
-                highOffer.second,
-                lowerOffer.first,
-                lowerOffer.second
-            )
-            return highOffer.first + lowOffer.first + lowOffer.second
-        }
-        val lowOffer = calculateOffer(
-            skuPrice,
-            numItems * skuPrice,
-            lowerOffer.first,
-            lowerOffer.second
-        )
-        return lowOffer.first + lowOffer.second
+//        higherOffer?.let {
+//            val highOffer = calculateOffer(
+//                skuPrice,
+//                numItems * skuPrice,
+//                higherOffer.first,
+//                higherOffer.second
+//            )
+//            val lowOffer = calculateOffer(
+//                skuPrice,
+//                highOffer.second,
+//                lowerOffer.first,
+//                lowerOffer.second
+//            )
+//            return highOffer.first + lowOffer.first + lowOffer.second
+//        }
+//        val lowOffer = calculateOffer(
+//            skuPrice,
+//            numItems * skuPrice,
+//            lowerOffer.first,
+//            lowerOffer.second
+//        )
+        return 0
         
         
         
     }
 }
+
 
