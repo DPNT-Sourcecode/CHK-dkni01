@@ -31,6 +31,7 @@ object CheckoutSolution {
     )
 
     // multiples discount A B H K P Q V
+    // each Pair is how many items must be bought to trigger the offer, and special price
     val multiplesOffers = hashMapOf(
         "A" to listOf(Pair(3, 130), Pair(5, 200)),
         "B" to listOf(Pair(2, 45), null),
@@ -39,6 +40,12 @@ object CheckoutSolution {
         "P" to listOf(Pair(5, 200), null),
         "Q" to listOf(Pair(3, 80), null),
         "V" to listOf(Pair(2, 90), Pair(3, 130)),
+    )
+
+    // how many items to trigger the offer
+    val getOneFree = hashMapOf(
+        "F" to 3,
+        "U" to 4,
     )
 
     fun checkout(skus: String): Int {
@@ -52,46 +59,35 @@ object CheckoutSolution {
 //        TODO lower case SKUs?
         
         // multiples discount A B H K P Q V
-        // BOGOF same F U
-        // BOGOF different E N R
+        // get one free same F U
+        // get one free different E N R
         // basic C D G I J L M O S T W X Y Z
         // NB some basic affected by offers
 
-        // calculating BOGOF (same product)
-        totalPrice += calculateBogofSameOffer(
-            "F",
-            skus.count { it == 'F' },
-            3
-        )
-        totalPrice += calculateBogofSameOffer(
-            "U",
-            skus.count { it == 'U' },
-            4
-        )
+        // calculating get one free (same item)
+        for (sku in "UF") {
+            totalPrice += calculateGetOneFreeSameOffer(
+                sku.toString(),
+                skus.count { it == sku }
+            )
+        }
+        
+//        totalPrice += calculateGetOneFreeSameOffer(
+//            "F",
+//            skus.count { it == 'F' }
+//        )
+//        totalPrice += calculateGetOneFreeSameOffer(
+//            "U",
+//            skus.count { it == 'U' }
+//        )
         
         // calculating products with discounts for multiple of that item
-        
         for (sku in "ABHKPQV") {
             totalPrice += calculateMultiplesOffer(
                 sku.toString(),
                 skus.count { it == sku }
             )
         }
-//        totalPrice += calculateMultiplesOffer(
-//            "A",
-//            skus.count { it == 'A' }
-//        )
-//
-//        totalPrice += calculateMultiplesOffer(
-//            "B",
-//            skus.count { it == 'B' }
-//        )
-//
-//        totalPrice += calculateMultiplesOffer(
-//            "H",
-//            skus.count { it == 'H' }
-//        )
-        
         
         // calculating basic products (no special offers)
         for (sku in "CDGIJLMOSTWXYZ") {
@@ -140,20 +136,23 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
     
-    private fun calculateBogofSameOffer(
+    private fun calculateGetOneFreeSameOffer(
         sku: String,
-        numItems: Int,
-        requiredItems: Int,
+        numItems: Int
     ) : Int {
-        val skuPrice = prices.getValue(sku)
-        val total = numItems * skuPrice
-        val offerF = calculateOffer(
-            skuPrice,
-            total,
-            requiredItems,
-            1
-        )
-        return total - (offerF.first * skuPrice)
+        val requiredItems = getOneFree[sku]
+        requiredItems?.let {
+            val skuPrice = prices.getValue(sku)
+            val total = numItems * skuPrice
+            val offer = calculateOffer(
+                skuPrice,
+                total,
+                requiredItems,
+                1
+            )
+            return total - (offer.first * skuPrice)
+        }
+        return 0
     }
     
     private fun calculateMultiplesOffer(
@@ -216,6 +215,7 @@ object CheckoutSolution {
         
     }
 }
+
 
 
 

@@ -32,8 +32,8 @@ class CheckoutSolutionTest {
 
     @Test
     fun invalidInputs() {
-//        Assertions.assertEquals(-1, CheckoutSolution.checkout("X"))
         Assertions.assertEquals(-1, CheckoutSolution.checkout("A9"))
+        Assertions.assertEquals(-1, CheckoutSolution.checkout("!"))
     }
 
     // multiple same items tests
@@ -90,4 +90,5 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(240, CheckoutSolution.checkout("UUUUUUUU"))
     }
 }
+
 
