@@ -44,7 +44,10 @@ object CheckoutSolution {
 
     // how many items to trigger the offer
     val getOneFree = hashMapOf(
+        "E" to 2,
         "F" to 3,
+        "N" to 3,
+        "R" to 3,
         "U" to 4,
     )
 
@@ -71,15 +74,6 @@ object CheckoutSolution {
                 skus.count { it == sku }
             )
         }
-        
-//        totalPrice += calculateGetOneFreeSameOffer(
-//            "F",
-//            skus.count { it == 'F' }
-//        )
-//        totalPrice += calculateGetOneFreeSameOffer(
-//            "U",
-//            skus.count { it == 'U' }
-//        )
         
         // calculating products with discounts for multiple of that item
         for (sku in "ABHKPQV") {
@@ -215,6 +209,7 @@ object CheckoutSolution {
         
     }
 }
+
 
 
 
