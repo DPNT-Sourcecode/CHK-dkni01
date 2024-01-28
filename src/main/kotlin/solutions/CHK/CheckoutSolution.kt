@@ -247,7 +247,8 @@ object CheckoutSolution {
                 return skus
             } else {
                 repeat(amountToSubtract) {
-                    skus.removeRange(firstRelevantSku, firstRelevantSku + 1)
+                    skus.toMutableList().removeAt(firstRelevantSku).toString()
+//                    skus.removeRange(firstRelevantSku, firstRelevantSku + 1)
                 }
                 return skus
             }
@@ -256,6 +257,7 @@ object CheckoutSolution {
     }
 
 }
+
 
 
 
