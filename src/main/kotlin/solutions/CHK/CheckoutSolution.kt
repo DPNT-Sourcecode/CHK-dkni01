@@ -15,35 +15,23 @@ object CheckoutSolution {
             return -1
         }
 
-        val numATotal = skus.count { it == 'A' } * PRICE_A
+        // calculating As
+        val offerA5 = calculateAOffer(skus.count { it == 'A' } * PRICE_A, 5)
+        val offerA3 = calculateAOffer(offerA5.second, 3)
+        val totalA = offerA5.first + offerA3.first + offerA3.second
         
-        if (numATotal > PRICE_A * 5) {
-            val leftoverA = numATotal % (PRICE_A * 5)
-            val offerA = ((numATotal - leftoverA) / (PRICE_A * 5)) * A_OFFER5
-            println("❗️ 5 offer ${offerA + leftoverA}")
-        }
-        
-        val offer5 = calculateAOffer(numATotal, 5)
-        println("❗️ 5 offer pair ${offer5}")
-        val offer3 = calculateAOffer(offer5.second, 3)
-        println("❗️ 3 offer pair ${offer3}")
-        val totalANew = offer5.first + offer3.first + offer3.second
-        println("❗️ total $totalANew")
-        
-//        val leftoverA = numATotal % (PRICE_A * 3)
-//        val offerA = ((numATotal - leftoverA) / (PRICE_A * 3)) * A_OFFER3
-
+        // calculating Bs
         val numBTotal = skus.count { it == 'B' } * PRICE_B
         val leftoverB = numBTotal % (PRICE_B * 2)
         val offerB = ((numBTotal - leftoverB) / (PRICE_B * 2)) * B_OFFER2
         
-        return (totalANew) + 
+        return (totalA) + 
                 (offerB + leftoverB) + 
                 (skus.count { it == 'C' } * PRICE_C) + 
                 (skus.count { it == 'D' } * PRICE_D)
     }
     
-    fun calculateAOffer(total: Int, multiplier: Int) : Pair<Int, Int> {
+    private fun calculateAOffer(total: Int, multiplier: Int) : Pair<Int, Int> {
         val offer: Int = if (multiplier == 3) {
             A_OFFER3
         } else {
@@ -55,6 +43,7 @@ object CheckoutSolution {
         return Pair(offerA, leftoverA)
     }
 }
+
 
 
 
