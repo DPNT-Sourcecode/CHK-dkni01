@@ -52,6 +52,8 @@ object CheckoutSolution {
         "R" to Pair(3, "Q"),
         "U" to Pair(4, "U")
     )
+    
+    private val collectionOfferPrice = 45
 
     fun checkout(skus: String): Int {
         if (skus.any { it !in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }) {
@@ -91,13 +93,23 @@ object CheckoutSolution {
         }
         
         // calculating buy any 3
-        val countCollectionOffer
-        val leftover = total % (price * requiredItems)
         
+        
+        val countCollectionOfferItems = adjustedSkus.count { it in "STXYZ" }
+        val leftover = countCollectionOfferItems % 3
+        val numCollectionOfferSets = (countCollectionOfferItems - leftover) / 3
+
+        var updatedSkusNew = adjustedSkus.replace("S", "")
+        updatedSkusNew = updatedSkusNew.replace("T", "")
+        updatedSkusNew = updatedSkusNew.replace("X", "")
+        updatedSkusNew = updatedSkusNew.replace("Y", "")
+        updatedSkusNew = updatedSkusNew.replace("Z", "")
+        
+        totalPrice += numCollectionOfferSets * collectionOfferPrice
         
         // calculating basic products (no special offers)
         for (sku in "CDGIJLMOSTWXYZ") {
-            totalPrice += adjustedSkus.count { it == sku } * prices.getValue(sku.toString())
+            totalPrice += updatedSkusNew.count { it == sku } * prices.getValue(sku.toString())
         }
         return totalPrice
     }
@@ -211,5 +223,6 @@ object CheckoutSolution {
         return deletedSkus + adjustedSkus
     }
 }
+
 
 
