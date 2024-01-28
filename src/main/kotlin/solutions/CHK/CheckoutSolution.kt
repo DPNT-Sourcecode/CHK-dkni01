@@ -232,6 +232,8 @@ object CheckoutSolution {
         if (numBuyAny3OfferSets == 0) {
             return skus
         }
+        
+        val test = removeCharacters(Set('S', 'T'), skus)
 
         var updatedSkusNew = skus.replace("S", "")
         updatedSkusNew = updatedSkusNew.replace("T", "")
@@ -266,9 +268,10 @@ object CheckoutSolution {
         }
     }
     
-    private fun removeCharacters(characters: Set<Characters>, string: String) : String {
-        return 
+    private fun removeCharacters(characters: Set<Char>, string: String) : String {
+        return string.filterNot { characters.contains(it) }
     }
 }
+
 
 
