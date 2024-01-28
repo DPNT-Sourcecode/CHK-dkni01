@@ -30,7 +30,7 @@ object CheckoutSolution {
     "Y" to 10
     )
     
-    const val PRICE_A = 50
+//    const val PRICE_A = 50
     const val PRICE_B = 30
     const val PRICE_C = 20
     const val PRICE_D = 15
@@ -45,10 +45,12 @@ object CheckoutSolution {
         if (skus.any { !listOf('A', 'B', 'C', 'D', 'E', 'F').contains(it) }) {
             return -1
         }
+        
+        val price = prices["A"]
 
         // calculating As
         val offerA5 = calculateOffer(
-            PRICE_A, 
+            prices["A"], 
             skus.count { it == 'A' } * PRICE_A, 
             5,
             A_OFFER5
@@ -97,7 +99,7 @@ object CheckoutSolution {
     }
     
     private fun calculateOffer(
-        price: Int,
+        price: Int?,
         total: Int,
         multiplier: Int,
         offer: Int
@@ -107,6 +109,7 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
 
 
