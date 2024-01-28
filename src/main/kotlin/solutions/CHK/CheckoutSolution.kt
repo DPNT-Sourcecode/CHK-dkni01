@@ -72,25 +72,20 @@ object CheckoutSolution {
         // calculating products with discounts for multiple of that item
         
         // TODO after lunch refactor these to use the new hashmap
+        
         totalPrice += calculateMultiplesOffer(
             "A",
-            skus.count { it == 'A' },
-            Pair(3, 130),
-            Pair(5, 200)
+            skus.count { it == 'A' }
         )
 
         totalPrice += calculateMultiplesOffer(
             "B",
-            skus.count { it == 'B' },
-            Pair(2, 45),
-            null
+            skus.count { it == 'B' }
         )
 
         totalPrice += calculateMultiplesOffer(
             "H",
-            skus.count { it == 'H' },
-            Pair(5, 45),
-            Pair(10, 80)
+            skus.count { it == 'H' }
         )
         
         
@@ -156,18 +151,40 @@ object CheckoutSolution {
         )
         return total - (offerF.first * skuPrice)
     }
-
-    /** 
-     * Offers shown as Pairs of the number of items needed to trigger it (first),
-     *  and the reduced price (second).
-     */
+    
     private fun calculateMultiplesOffer(
         sku: String,
-        numItems: Int,
-        lowerOffer: Pair<Int, Int>,
-        higherOffer: Pair<Int, Int>?
+        numItems: Int
     ) : Int {
         val skuPrice = prices.getValue(sku)
+        val lowerOffer = multiplesOffers[sku]
+        val higherOffer = multiplesOffers[sku]
+        
+        lowerOffer?.let {
+            higherOffer?.let {
+                val highOffer = calculateOffer(
+                    skuPrice,
+                    numItems * skuPrice,
+                    higherOffer.first().first,
+                    higherOffer.second
+                )
+                val lowOffer = calculateOffer(
+                    skuPrice,
+                    highOffer.second,
+                    lowerOffer.first,
+                    lowerOffer.second
+                )
+                return highOffer.first + lowOffer.first + lowOffer.second
+            }
+            val lowOffer = calculateOffer(
+                skuPrice,
+                numItems * skuPrice,
+                lowerOffer.first,
+                lowerOffer.second
+            )
+            return lowOffer.first + lowOffer.second
+        }
+        
         higherOffer?.let {
             val highOffer = calculateOffer(
                 skuPrice,
@@ -195,3 +212,4 @@ object CheckoutSolution {
         
     }
 }
+
