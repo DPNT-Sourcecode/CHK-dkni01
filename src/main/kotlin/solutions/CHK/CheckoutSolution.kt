@@ -31,11 +31,11 @@ object CheckoutSolution {
     )
     
 //    const val PRICE_A = 50
-    const val PRICE_B = 30
-    const val PRICE_C = 20
-    const val PRICE_D = 15
-    const val PRICE_E = 40
-    const val PRICE_F = 10
+//    const val PRICE_B = 30
+//    const val PRICE_C = 20
+//    const val PRICE_D = 15
+//    const val PRICE_E = 40
+//    const val PRICE_F = 10
     
     const val A_OFFER3 = 130
     const val A_OFFER5 = 200
@@ -46,17 +46,17 @@ object CheckoutSolution {
             return -1
         }
         
-        val price = prices["A"]
+//        TODO catch NoSuchElementException errors
 
         // calculating As
         val offerA5 = calculateOffer(
-            prices["A"], 
-            skus.count { it == 'A' } * PRICE_A, 
+            prices.getValue("A"), 
+            skus.count { it == 'A' } * prices.getValue("A"), 
             5,
             A_OFFER5
         )
         val offerA3 = calculateOffer(
-            PRICE_A,
+            prices.getValue("A"),
             offerA5.second,
             3,
             A_OFFER3
@@ -65,8 +65,8 @@ object CheckoutSolution {
 
         // calculating Es
         val offerE = calculateOffer(
-            PRICE_E,
-            skus.count { it == 'E' } * PRICE_E,
+            prices.getValue("E"),
+            skus.count { it == 'E' } * prices.getValue("E"),
             2,
             1
         )
@@ -74,8 +74,8 @@ object CheckoutSolution {
         
         // calculating Bs
         val newB = calculateOffer(
-            PRICE_B,
-            adjustedBCount * PRICE_B,
+            prices.getValue("B"),
+            adjustedBCount * prices.getValue("B"),
             2,
             B_OFFER2
         )
@@ -83,23 +83,24 @@ object CheckoutSolution {
         
         // calculating Fs
         val offerF = calculateOffer(
-            PRICE_F,
-            skus.count { it == 'F' } * PRICE_F,
+            prices.getValue("F"),
+            skus.count { it == 'F' } * prices.getValue("F"),
             3,
             1
         )
-        val totalF = (skus.count { it == 'F' } * PRICE_F) - (offerF.first * PRICE_F)
+        val totalF = (skus.count { it == 'F' } * prices.getValue("F")) - 
+                (offerF.first * prices.getValue("F"))
         
         return totalA + 
                 (if (totalB <= 0) 0 else totalB) + 
-                (skus.count { it == 'C' } * PRICE_C) + 
-                (skus.count { it == 'D' } * PRICE_D) +
-                (skus.count { it == 'E' } * PRICE_E) +
+                (skus.count { it == 'C' } * prices.getValue("C")) + 
+                (skus.count { it == 'D' } * prices.getValue("D")) +
+                (skus.count { it == 'E' } * prices.getValue("E")) +
                 totalF
     }
     
     private fun calculateOffer(
-        price: Int?,
+        price: Int,
         total: Int,
         multiplier: Int,
         offer: Int
@@ -109,6 +110,7 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
 
 
