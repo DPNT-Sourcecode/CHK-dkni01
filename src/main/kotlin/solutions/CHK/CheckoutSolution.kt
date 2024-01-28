@@ -244,10 +244,10 @@ object CheckoutSolution {
         val countZ = skus.count { it == 'Z' }
         
         val allS = "S".repeat(countS)
-        val allT = "S".repeat(countT)
-        val allX = "S".repeat(countX)
-        val allY = "S".repeat(countY)
-        val allZ = "S".repeat(countZ)
+        val allT = "T".repeat(countT)
+        val allX = "X".repeat(countX)
+        val allY = "Y".repeat(countY)
+        val allZ = "Z".repeat(countZ)
         
         // products in ascending price order
         val orderedOfferSkus = allX + allS + allT + allY + allZ
@@ -257,15 +257,14 @@ object CheckoutSolution {
             0 -> return updatedSkusNew
             1 -> {
                 updatedSkusNew += orderedOfferSkus[0]
+                return updatedSkusNew
             }
             2 -> {
                 updatedSkusNew += orderedOfferSkus[0]
                 updatedSkusNew += orderedOfferSkus[1]
+                return updatedSkusNew
             }
             else -> return updatedSkusNew
         }
-        
-        return updatedSkusNew
     }
 }
-
