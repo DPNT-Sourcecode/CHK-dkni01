@@ -268,8 +268,11 @@ object CheckoutSolution {
         if (adjustedTotal < 0) {
             return skus
         }
-        skus.toMutableList().removeAll(skuToRemove)
+        val newSkus = skus.toMutableList().removeAll(listOf(skuToRemove))
+        val adjustedSkus = skuToRemove.toString() * adjustedTotal
+        
     }
 
 }
+
 
