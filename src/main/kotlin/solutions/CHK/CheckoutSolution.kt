@@ -54,7 +54,6 @@ object CheckoutSolution {
     )
 
     fun checkout(skus: String): Int {
-        val skus = skus.uppercase()
         if (skus.any { it !in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }) {
             return -1
         }
@@ -208,11 +207,3 @@ object CheckoutSolution {
         return deletedSkus + adjustedSkus
     }
 }
-
-
-
-
-
-
-
-

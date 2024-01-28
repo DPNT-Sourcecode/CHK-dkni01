@@ -13,12 +13,6 @@ class CheckoutSolutionTest {
     }
 
     @Test
-    fun lowercaseSkusAreOk() {
-        Assertions.assertEquals(115, CheckoutSolution.checkout("abcd"))
-        Assertions.assertEquals(150, CheckoutSolution.checkout("XyZ"))
-    }
-
-    @Test
     fun basicItemsOnly() {
         Assertions.assertEquals(20, CheckoutSolution.checkout("C"))
         Assertions.assertEquals(15, CheckoutSolution.checkout("D"))
@@ -40,6 +34,7 @@ class CheckoutSolutionTest {
     fun invalidInputs() {
         Assertions.assertEquals(-1, CheckoutSolution.checkout("A9"))
         Assertions.assertEquals(-1, CheckoutSolution.checkout("!"))
+        Assertions.assertEquals(-1, CheckoutSolution.checkout("abcd"))
     }
 
     // multiple same items tests
@@ -113,5 +108,3 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(240, CheckoutSolution.checkout("UUUUUUUU"))
     }
 }
-
-
