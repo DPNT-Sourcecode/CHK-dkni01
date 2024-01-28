@@ -67,6 +67,16 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(40, CheckoutSolution.checkout("FFFFF"))
         Assertions.assertEquals(40, CheckoutSolution.checkout("FFFFFF"))
     }
+
+    @Test
+    fun offerU() {
+        Assertions.assertEquals(40, CheckoutSolution.checkout("U"))
+        Assertions.assertEquals(120, CheckoutSolution.checkout("UUU"))
+        Assertions.assertEquals(120, CheckoutSolution.checkout("UUUU"))
+        Assertions.assertEquals(160, CheckoutSolution.checkout("UUUUU"))
+        Assertions.assertEquals(240, CheckoutSolution.checkout("UUUUUUUU"))
+    }
 }
+
 
 

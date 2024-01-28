@@ -61,6 +61,16 @@ object CheckoutSolution {
         val totalF = (skus.count { it == 'F' } * prices.getValue("F")) -
                 (offerF.first * prices.getValue("F"))
         totalPrice += totalF
+
+        val offerU = calculateOffer(
+            prices.getValue("U"),
+            skus.count { it == 'U' } * prices.getValue("U"),
+            4,
+            1
+        )
+        val totalU = (skus.count { it == 'U' } * prices.getValue("U")) -
+                (offerU.first * prices.getValue("U"))
+        totalPrice += totalU
         
         // calculating basic products (no special offers)
         for (sku in "CDGIJLMOSTWXYZ") {
@@ -123,6 +133,7 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
 
 
