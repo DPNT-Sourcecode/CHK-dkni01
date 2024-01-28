@@ -1,7 +1,7 @@
 package solutions.CHK
 
 object CheckoutSolution {
-    val prices = hashMapOf(
+    private val prices = hashMapOf(
     "A" to 50,
     "B" to 30,
     "C" to 20,
@@ -29,11 +29,18 @@ object CheckoutSolution {
     "Z" to 50,
     "Y" to 10
     )
-    
-    const val A_OFFER3 = 130
-    const val A_OFFER5 = 200
-    const val B_OFFER2 = 45
-    
+
+    // multiples discount A B H K P Q V
+    val multiplesOffers = hashMapOf(
+        "A" to listOf(Pair(3, 130), Pair(5, 200)),
+        "B" to listOf(Pair(2, 45), null),
+        "H" to listOf(Pair(5, 45), Pair(10, 80)),
+        "K" to listOf(Pair(2, 150), null),
+        "P" to listOf(Pair(5, 200), null),
+        "Q" to listOf(Pair(3, 80), null),
+        "V" to listOf(Pair(2, 90), Pair(3, 130)),
+    )
+
     fun checkout(skus: String): Int {
         if (skus.any { it !in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }) {
             return -1
@@ -64,6 +71,7 @@ object CheckoutSolution {
         
         // calculating products with discounts for multiple of that item
         
+        // TODO after lunch refactor these to use the new hashmap
         totalPrice += calculateMultiplesOffer(
             "A",
             skus.count { it == 'A' },
@@ -187,9 +195,3 @@ object CheckoutSolution {
         
     }
 }
-
-
-
-
-
-
