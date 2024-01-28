@@ -37,17 +37,23 @@ object CheckoutSolution {
         val leftover = totalE % (PRICE_E * 2)
         val pairsE = (totalE - leftover) / (PRICE_E * 2)
 
-        println("❗️ pairsE: $pairsE")
+        val leftover = total % (price * multiplier)
+        val reduced = ((total - leftover) / (price * multiplier)) * offer
+
+        val offerE = calculateBasicOffer(
+            PRICE_E,
+            skus.count { it == 'E' } * PRICE_E,
+            2,
+            1
+        )
+        
+        
+
+        println("❗️ pairsE: $pairsE, ${offerE.first}")
         
         val adjustedBCount = skus.count { it == 'B' } - pairsE
 
-//        var ignoreBs = false
-//        if (pairsE == skus.count { it == 'B' }) {
-//            ignoreBs = true
-//        }
-//
-//        val subtractedBs = totalB - (pairsE * 30)
-//        val finalBs = if (ignoreBs) 0 else subtractedBs
+
         
         // calculating Bs
         val newB = calculateBasicOffer(
@@ -57,8 +63,6 @@ object CheckoutSolution {
             B_OFFER2
         )
         val totalB = newB.first + newB.second
-        
-        
         
         return (totalA) + 
                 (totalB) + 
@@ -77,6 +81,7 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
 
 
