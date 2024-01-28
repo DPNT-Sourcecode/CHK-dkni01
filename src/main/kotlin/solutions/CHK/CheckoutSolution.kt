@@ -258,14 +258,9 @@ object CheckoutSolution {
             return skus
         }
         val adjustedSkus = skuToRemove.toString().repeat(adjustedTotal)
-        val newSkus = skus.toMutableList().removeAll(listOf(skuToRemove)).toString() + adjustedSkus
+        val deletedSkus: String = skus.replace(skuToRemove.toString(), "")
+        val newSkus = deletedSkus + adjustedSkus
         return newSkus
     }
 
 }
-
-
-
-
-
-
