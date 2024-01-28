@@ -246,7 +246,7 @@ object CheckoutSolution {
             if (firstRelevantSku == -1) {
                 return skus
             } else {
-                repeat(freeItemCount) {
+                repeat(amountToSubtract) {
                     skus.removeRange(firstRelevantSku, firstRelevantSku + 1)
                 }
                 return skus
@@ -256,6 +256,7 @@ object CheckoutSolution {
     }
 
 }
+
 
 
 
