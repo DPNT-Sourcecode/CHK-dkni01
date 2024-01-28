@@ -30,10 +30,17 @@ object CheckoutSolution {
         val leftoverB = numBTotal % (PRICE_B * 2)
         val offerB = ((numBTotal - leftoverB) / (PRICE_B * 2)) * B_OFFER2
         
-        return (offerA + leftoverA) + 
+        return (calculateAOffer(numATotal, 3)) + 
                 (offerB + leftoverB) + 
                 (skus.count { it == 'C' } * PRICE_C) + 
                 (skus.count { it == 'D' } * PRICE_D)
     }
+    
+    fun calculateAOffer(total: Int, multiplier: Int) : Int {
+        val leftoverA = total % (PRICE_A * multiplier)
+        val offerA = ((total - leftoverA) / (PRICE_A * multiplier)) * A_OFFER3
+        return offerA + leftoverA
+    }
 }
+
 
