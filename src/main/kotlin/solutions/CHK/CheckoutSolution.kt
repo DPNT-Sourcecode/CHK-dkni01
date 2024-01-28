@@ -48,11 +48,16 @@ object CheckoutSolution {
         
         println("❗️ pairsE: $pairsE")
         
-        val subtractedBs = totalB - (pairsE * 30)
+        var ignoreBs = false
+        if (pairsE == skus.count { it == 'B' }) {
+            ignoreBs = true
+        }
         
+        val subtractedBs = totalB - (pairsE * 30)
+        val finalBs = if (ignoreBs) 0 else subtractedBs
         
         return (totalA) + 
-                (subtractedBs) + 
+                (finalBs) + 
                 (skus.count { it == 'C' } * PRICE_C) + 
                 (skus.count { it == 'D' } * PRICE_D) +
                 (skus.count { it == 'E' } * PRICE_E)
@@ -68,6 +73,7 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
 
 
