@@ -1,5 +1,7 @@
 package solutions.CHK
 
+import javax.xml.stream.events.Characters
+
 /**
  * Calculate price of items, including special offers.
  */
@@ -263,5 +265,10 @@ object CheckoutSolution {
             else -> updatedSkusNew
         }
     }
+    
+    private fun removeCharacters(characters: Set<Characters>, string: String) : String {
+        return 
+    }
 }
+
 
