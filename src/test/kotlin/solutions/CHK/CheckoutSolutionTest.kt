@@ -7,16 +7,16 @@ class CheckoutSolutionTest {
 
     @Test
     fun checkout() {
-//        Assertions.assertEquals(50, CheckoutSolution.checkout("A"))
-//        Assertions.assertEquals(30, CheckoutSolution.checkout("B"))
-//        Assertions.assertEquals(20, CheckoutSolution.checkout("C"))
-//        Assertions.assertEquals(15, CheckoutSolution.checkout("D"))
-//        Assertions.assertEquals(40, CheckoutSolution.checkout("E"))
-//        Assertions.assertEquals(145, CheckoutSolution.checkout("ABCDDD"))
-//
-//        Assertions.assertEquals(180, CheckoutSolution.checkout("AAAA"))
-//        Assertions.assertEquals(250, CheckoutSolution.checkout("AAAAAA"))
-//        Assertions.assertEquals(330, CheckoutSolution.checkout("AAAAAAAA"))
+        Assertions.assertEquals(50, CheckoutSolution.checkout("A"))
+        Assertions.assertEquals(30, CheckoutSolution.checkout("B"))
+        Assertions.assertEquals(20, CheckoutSolution.checkout("C"))
+        Assertions.assertEquals(15, CheckoutSolution.checkout("D"))
+        Assertions.assertEquals(40, CheckoutSolution.checkout("E"))
+        Assertions.assertEquals(145, CheckoutSolution.checkout("ABCDDD"))
+
+        Assertions.assertEquals(180, CheckoutSolution.checkout("AAAA"))
+        Assertions.assertEquals(250, CheckoutSolution.checkout("AAAAAA"))
+        Assertions.assertEquals(330, CheckoutSolution.checkout("AAAAAAAA"))
 //        
         Assertions.assertEquals(45, CheckoutSolution.checkout("BB"))
         Assertions.assertEquals(220, CheckoutSolution.checkout("BBBBAAA"))
@@ -32,7 +32,3 @@ class CheckoutSolutionTest {
 
     
 }
-
-
-
-
