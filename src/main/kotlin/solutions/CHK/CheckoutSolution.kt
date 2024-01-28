@@ -74,18 +74,11 @@ object CheckoutSolution {
 
 
 //         calculating Es
-//        val offerE = calculateOffer(
-//            prices.getValue("E"),
-//            skus.count { it == 'E' } * prices.getValue("E"),
-//            2,
-//            1
-//        )
-//        val adjustedBCount = skus.count { it == 'B' } - offerE.first
-        
+
         totalPrice += skus.count { it == 'E' } * prices.getValue("E")
         adjustedSkus = removeFreeItems(skus, "E")
         
-//        println("❗️ new skus list $adjustedSkus")
+        println("❗️ new skus list $adjustedSkus")
 
 //        // calculating Bs
 //        val newB = calculateOffer(
@@ -234,6 +227,8 @@ object CheckoutSolution {
             )
             val freeItemCount = skus.count { char -> char == it.second.first() } - offer.first
             
+            println("♦️ free items $freeItemCount, sku ${it.second}")
+            
             val firstRelevantSku = skus.indexOfFirst { char -> char == it.second.first() }
             if (firstRelevantSku == -1) {
                 return skus
@@ -248,4 +243,5 @@ object CheckoutSolution {
     }
 
 }
+
 
