@@ -25,11 +25,3 @@ object CheckoutSolution {
                 (skus.count { it == 'D' } * PRICE_D)
     }
 }
-
-
-
-
-
-
-
-
