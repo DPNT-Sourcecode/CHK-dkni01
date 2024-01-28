@@ -95,19 +95,14 @@ object CheckoutSolution {
         }
         
         // calculating buy any 3
-        
-        
         val countBuyAny3OfferItems = adjustedSkus.count { it in "STXYZ" }
-
         val leftover = countBuyAny3OfferItems % 3
         val numBuyAny3OfferSets = (countBuyAny3OfferItems - leftover) / 3
 
         adjustedSkus = calculateBuyAny3Offer(adjustedSkus)
-
-        
         totalPrice += numBuyAny3OfferSets * buyAny3OfferPrice
         
-        // calculating basic products (no special offers)
+        // calculating remaining basic prices (no offers)
         for (sku in "CDGIJLMOSTWXYZ") {
             totalPrice += adjustedSkus.count { it == sku } * prices.getValue(sku.toString())
         }
@@ -232,16 +227,8 @@ object CheckoutSolution {
         if (numBuyAny3OfferSets == 0) {
             return skus
         }
-        
-        val test = skus.replace(Regex("[STXYZ]+"), "")
-        
 
         var updatedSkusNew = skus.replace(Regex("[STXYZ]+"), "")
-//        updatedSkusNew = updatedSkusNew.replace("T", "")
-//        updatedSkusNew = updatedSkusNew.replace("X", "")
-//        updatedSkusNew = updatedSkusNew.replace("Y", "")
-//        updatedSkusNew = updatedSkusNew.replace("Z", "")
-        
 
         val allS = "S".repeat(skus.count { it == 'S' })
         val allT = "T".repeat(skus.count { it == 'T' })
@@ -258,21 +245,16 @@ object CheckoutSolution {
                 updatedSkusNew += orderedOfferSkus[0]
                 updatedSkusNew
             }
-
             2 -> {
                 updatedSkusNew += orderedOfferSkus[0]
                 updatedSkusNew += orderedOfferSkus[1]
                 updatedSkusNew
             }
-
             else -> updatedSkusNew
         }
     }
-    
-    private fun removeCharacters(characters: Set<Char>, string: String) : String {
-        return string.filterNot { characters.contains(it) }
-    }
 }
+
 
 
 
