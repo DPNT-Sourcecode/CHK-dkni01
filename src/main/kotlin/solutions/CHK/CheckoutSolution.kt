@@ -54,6 +54,7 @@ object CheckoutSolution {
     )
 
     fun checkout(skus: String): Int {
+        val skus = skus.lowercase()
         if (skus.any { it !in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }) {
             return -1
         }
@@ -63,27 +64,18 @@ object CheckoutSolution {
 //        TODO catch NoSuchElementException errors
 //        TODO lower case SKUs?
         
-        // multiples discount A B H K P Q V
-        // get one free same F U
-        
-        // get one free different E N R
-        
-        // basic C D G I J L M O S T W X Y Z
-        // NB some basic affected by offers
-
-
         // calculating get one free (different item)
-    
+        var adjustedSkus: String = ""
+        
         totalPrice += skus.count { it == 'E' } * prices.getValue("E")
-        var adjustedSkus: String = removeFreeItems(skus, "E")
+        adjustedSkus = removeFreeItems(skus, "E")
 
         totalPrice += skus.count { it == 'N' } * prices.getValue("N")
         adjustedSkus = removeFreeItems(adjustedSkus, "N")
 
         totalPrice += skus.count { it == 'R' } * prices.getValue("R")
         adjustedSkus = removeFreeItems(adjustedSkus, "R")
-
-
+        
         // calculating get one free (same item)
         for (sku in "UF") {
             totalPrice += calculateGetOneFreeSameOffer(
@@ -218,6 +210,7 @@ object CheckoutSolution {
     }
 
 }
+
 
 
 

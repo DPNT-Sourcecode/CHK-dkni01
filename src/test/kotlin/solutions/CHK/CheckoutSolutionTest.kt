@@ -5,12 +5,18 @@ import org.junit.jupiter.api.Test
 
 class CheckoutSolutionTest {
 
-//    @Test
-//    fun combined() {
-//        Assertions.assertEquals(145, CheckoutSolution.checkout("ABCDDD"))
-//        Assertions.assertEquals(220, CheckoutSolution.checkout("BBBBAAA"))
-//        Assertions.assertEquals(170, CheckoutSolution.checkout("FFFAAAC"))
-//    }
+    @Test
+    fun combinedSkus() {
+        Assertions.assertEquals(145, CheckoutSolution.checkout("ABCDDD"))
+        Assertions.assertEquals(220, CheckoutSolution.checkout("BBBBAAA"))
+        Assertions.assertEquals(170, CheckoutSolution.checkout("FFFAAAC"))
+    }
+
+    @Test
+    fun lowercaseSkusAreOk() {
+        Assertions.assertEquals(115, CheckoutSolution.checkout("abcd"))
+        Assertions.assertEquals(150, CheckoutSolution.checkout("XyZ"))
+    }
 
     @Test
     fun basicItemsOnly() {
@@ -107,4 +113,5 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(240, CheckoutSolution.checkout("UUUUUUUU"))
     }
 }
+
 
