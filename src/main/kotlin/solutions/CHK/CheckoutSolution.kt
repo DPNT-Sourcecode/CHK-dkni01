@@ -233,13 +233,14 @@ object CheckoutSolution {
             return skus
         }
         
-        val test = removeCharacters(Set('S', 'T'), skus)
+        val test = skus.replace(Regex("[STXYZ]+"), "")
+        
 
-        var updatedSkusNew = skus.replace("S", "")
-        updatedSkusNew = updatedSkusNew.replace("T", "")
-        updatedSkusNew = updatedSkusNew.replace("X", "")
-        updatedSkusNew = updatedSkusNew.replace("Y", "")
-        updatedSkusNew = updatedSkusNew.replace("Z", "")
+        var updatedSkusNew = skus.replace(Regex("[STXYZ]+"), "")
+//        updatedSkusNew = updatedSkusNew.replace("T", "")
+//        updatedSkusNew = updatedSkusNew.replace("X", "")
+//        updatedSkusNew = updatedSkusNew.replace("Y", "")
+//        updatedSkusNew = updatedSkusNew.replace("Z", "")
         
 
         val allS = "S".repeat(skus.count { it == 'S' })
@@ -272,6 +273,7 @@ object CheckoutSolution {
         return string.filterNot { characters.contains(it) }
     }
 }
+
 
 
 
