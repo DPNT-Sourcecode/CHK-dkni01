@@ -237,43 +237,64 @@ object CheckoutSolution {
         updatedSkusNew = updatedSkusNew.replace("Y", "")
         updatedSkusNew = updatedSkusNew.replace("Z", "")
         
-        val countS = skus.count { it == 'S' }
-        val countT = skus.count { it == 'T' }
-        val countX = skus.count { it == 'X' }
-        val countY = skus.count { it == 'Y' }
-        val countZ = skus.count { it == 'Z' }
+//        val countS = skus.count { it == 'S' }
+//        val countT = skus.count { it == 'T' }
+//        val countX = skus.count { it == 'X' }
+//        val countY = skus.count { it == 'Y' }
+//        val countZ = skus.count { it == 'Z' }
         
         when (leftover) {
-            0 ->
-        }
-        
-        if (leftover == 0) {
-            return updatedSkusNew
-        } else if (leftover == 1) {
-            // products in ascending price order
-            for (char in "XSTYZ") {
-                val count = skus.count { it == char }
-                if (count >= 1) {
-                    updatedSkusNew += char.toString().repeat(1)
-                    return updatedSkusNew
+            0 -> return updatedSkusNew
+            1 -> {
+                // products in ascending price order
+                for (char in "XSTYZ") {
+                    val count = skus.count { it == char }
+                    if (count >= 1) {
+                        updatedSkusNew += char.toString().repeat(leftover)
+                        return updatedSkusNew
+                    }
                 }
             }
-
-        } else {
-            // leftover == 2
-            for (char in "XSTYZ") {
-                val count = skus.count { it == char }
-                if (count >= 2) {
-                    updatedSkusNew += char.toString().repeat(2)
-                    return updatedSkusNew
+            2 -> {
+                for (char in "XSTYZ") {
+                    val count = skus.count { it == char }
+                    if (count >= 2) {
+                        updatedSkusNew += char.toString().repeat(leftover)
+                        return updatedSkusNew
+                    }
                 }
             }
+            else -> return updatedSkusNew
         }
         
-        
+//        if (leftover == 0) {
+//            return updatedSkusNew
+//        } else if (leftover == 1) {
+//            // products in ascending price order
+//            for (char in "XSTYZ") {
+//                val count = skus.count { it == char }
+//                if (count >= 1) {
+//                    updatedSkusNew += char.toString().repeat(1)
+//                    return updatedSkusNew
+//                }
+//            }
+//
+//        } else {
+//            // leftover == 2
+//            for (char in "XSTYZ") {
+//                val count = skus.count { it == char }
+//                if (count >= 2) {
+//                    updatedSkusNew += char.toString().repeat(2)
+//                    return updatedSkusNew
+//                }
+//            }
+//        }
+//        
+//        
         return updatedSkusNew
     }
 }
+
 
 
 
