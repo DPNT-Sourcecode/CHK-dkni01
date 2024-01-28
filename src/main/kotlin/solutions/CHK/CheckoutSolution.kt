@@ -53,7 +53,7 @@ object CheckoutSolution {
         "U" to Pair(4, "U")
     )
     
-    private val collectionOfferPrice = 45
+    private val buyAny3OfferPrice = 45
 
     fun checkout(skus: String): Int {
         if (skus.any { it !in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }) {
@@ -93,23 +93,24 @@ object CheckoutSolution {
         }
         
         // calculating buy any 3
+        adjustedSkus = calculateBuyAny3Offer(adjustedSkus)
         
-        
-        val countCollectionOfferItems = adjustedSkus.count { it in "STXYZ" }
-        val leftover = countCollectionOfferItems % 3
-        val numCollectionOfferSets = (countCollectionOfferItems - leftover) / 3
+        val countBuyAny3OfferItems = adjustedSkus.count { it in "STXYZ" }
 
-        var updatedSkusNew = adjustedSkus.replace("S", "")
-        updatedSkusNew = updatedSkusNew.replace("T", "")
-        updatedSkusNew = updatedSkusNew.replace("X", "")
-        updatedSkusNew = updatedSkusNew.replace("Y", "")
-        updatedSkusNew = updatedSkusNew.replace("Z", "")
+        val leftover = countBuyAny3OfferItems % 3
+        val numBuyAny3OfferSets = (countBuyAny3OfferItems - leftover) / 3
+//        
+//        var updatedSkusNew = adjustedSkus.replace("S", "")
+//        updatedSkusNew = updatedSkusNew.replace("T", "")
+//        updatedSkusNew = updatedSkusNew.replace("X", "")
+//        updatedSkusNew = updatedSkusNew.replace("Y", "")
+//        updatedSkusNew = updatedSkusNew.replace("Z", "")
         
-        totalPrice += numCollectionOfferSets * collectionOfferPrice
+        totalPrice += numBuyAny3OfferSets * buyAny3OfferPrice
         
         // calculating basic products (no special offers)
         for (sku in "CDGIJLMOSTWXYZ") {
-            totalPrice += updatedSkusNew.count { it == sku } * prices.getValue(sku.toString())
+            totalPrice += adjustedSkus.count { it == sku } * prices.getValue(sku.toString())
         }
         return totalPrice
     }
@@ -196,11 +197,11 @@ object CheckoutSolution {
                 1
             )
             
-            val amountToSubtract = offer.first
+            val numberToRemove = offer.first
             return removeFreeItemsFromString(
                 skus,
                 freeItemSku,
-                amountToSubtract
+                numberToRemove
             )
         }
         return skus
@@ -222,7 +223,33 @@ object CheckoutSolution {
         val adjustedSkus = skuToRemove.toString().repeat(adjustedTotal)
         return deletedSkus + adjustedSkus
     }
+    
+    private fun calculateBuyAny3Offer(
+        skus: String
+    ) : String {
+        val countBuyAny3OfferItems = skus.count { it in "STXYZ" }
+        val leftover = countBuyAny3OfferItems % 3
+        val numBuyAny3OfferSets = (countBuyAny3OfferItems - leftover) / 3
+        if (numBuyAny3OfferSets == 0) {
+            return skus
+        }
+
+        var updatedSkusNew = skus.replace("S", "")
+        updatedSkusNew = updatedSkusNew.replace("T", "")
+        updatedSkusNew = updatedSkusNew.replace("X", "")
+        updatedSkusNew = updatedSkusNew.replace("Y", "")
+        updatedSkusNew = updatedSkusNew.replace("Z", "")
+        
+        val countS = skus.count { it == 'S' }
+        val countT = skus.count { it == 'T' }
+        val countX = skus.count { it == 'X' }
+        val countY = skus.count { it == 'Y' }
+        val countZ = skus.count { it == 'Z' }
+        
+        return updatedSkusNew
+    }
 }
+
 
 
 
