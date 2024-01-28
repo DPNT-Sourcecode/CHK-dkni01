@@ -77,7 +77,7 @@ object CheckoutSolution {
         totalPrice += skus.count { it == 'E' } * prices.getValue("E")
         var adjustedSkus: String = removeFreeItems(skus, "E")
         
-        println("❗️ new skus list $adjustedSkus")
+//        println("❗️ new skus list $adjustedSkus")
 
 //        // calculating Bs
 //        val newB = calculateOffer(
@@ -246,21 +246,23 @@ object CheckoutSolution {
         }
         return skus
     }
-    
+
     private fun removeFreeItemsFromString(
         skus: String,
         skuToRemove: Char,
         howManyToRemove: Int
-    ) : String {
+    ): String {
         val totalRelevantSku = skus.count { it == skuToRemove }
         val adjustedTotal = totalRelevantSku - howManyToRemove
-        if (adjustedTotal < 0) {
-            return skus
-        }
-        val adjustedSkus = skuToRemove.toString().repeat(adjustedTotal)
         val deletedSkus: String = skus.replace(skuToRemove.toString(), "")
-        val newSkus = deletedSkus + adjustedSkus
-        return newSkus
+
+        if (adjustedTotal < 0) {
+            return deletedSkus
+        }
+
+        val adjustedSkus = skuToRemove.toString().repeat(adjustedTotal)
+        return deletedSkus + adjustedSkus
     }
 
 }
+
