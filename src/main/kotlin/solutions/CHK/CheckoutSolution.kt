@@ -44,13 +44,13 @@ object CheckoutSolution {
         "V" to listOf(Pair(2, 90), Pair(3, 130)),
     )
 
-    // how many items to trigger the offer
+    // how many items to trigger the offer, and what item you get free
     private val getOneFree = hashMapOf(
-        "E" to 2,
-        "F" to 3,
-        "N" to 3,
-        "R" to 3,
-        "U" to 4,
+        "E" to Pair(2, "B"),
+        "F" to Pair(3, "F"),
+        "N" to Pair(3, "M"),
+        "R" to Pair(3, "Q"),
+        "U" to Pair(4, "U")
     )
 
     fun checkout(skus: String): Int {
@@ -175,7 +175,7 @@ object CheckoutSolution {
             val offer = calculateOffer(
                 skuPrice,
                 total,
-                requiredItems,
+                requiredItems.first,
                 1
             )
             return total - (offer.first * skuPrice)
@@ -224,30 +224,28 @@ object CheckoutSolution {
     ) : String {
         val skuPrice = prices.getValue(sku)
         val requiredItems = getOneFree[sku]
-        var newSkus = skus
 
         requiredItems?.let {
-            val offerE = calculateOffer(
+            val offer = calculateOffer(
                 skuPrice,
-                skus.count { char -> char == sku } * skuPrice,
-                it,
+                skus.count { char -> char == sku.first() } * skuPrice,
+                it.first,
                 1
             )
-            val freeItemCount = skus.count { char -> char == 'B' } - offerE.first
+            val freeItemCount = skus.count { char -> char == it.second.first() } - offer.first
             
-            val firstRelevantSku = skus.indexOfFirst { char -> char == 'B' }
+            val firstRelevantSku = skus.indexOfFirst { char -> char == it.second.first() }
             if (firstRelevantSku == -1) {
                 return skus
             } else {
                 repeat(freeItemCount) {
-                    newSkus.removeRange(firstRelevantSku, firstRelevantSku + 1)
+                    skus.removeRange(firstRelevantSku, firstRelevantSku + 1)
                 }
-                return newSkus
+                return skus
             }
-            
         }
-        
         return skus
     }
 
 }
+
