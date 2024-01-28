@@ -110,11 +110,3 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
-
-
-
-
-
-
-
-
