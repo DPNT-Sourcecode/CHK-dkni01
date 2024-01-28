@@ -28,7 +28,6 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(90, CheckoutSolution.checkout("X"))
         Assertions.assertEquals(10, CheckoutSolution.checkout("Y"))
         Assertions.assertEquals(50, CheckoutSolution.checkout("Z"))
-        
     }
 
     @Test
@@ -37,12 +36,22 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(-1, CheckoutSolution.checkout("A9"))
     }
 
+    // multiple same items tests
     @Test
     fun offerA() {
         Assertions.assertEquals(50, CheckoutSolution.checkout("A"))
         Assertions.assertEquals(180, CheckoutSolution.checkout("AAAA"))
         Assertions.assertEquals(250, CheckoutSolution.checkout("AAAAAA"))
         Assertions.assertEquals(330, CheckoutSolution.checkout("AAAAAAAA"))
+    }
+
+    @Test
+    fun offerH() {
+        Assertions.assertEquals(10, CheckoutSolution.checkout("H"))
+        Assertions.assertEquals(40, CheckoutSolution.checkout("HHHH"))
+        Assertions.assertEquals(45, CheckoutSolution.checkout("HHHHH"))
+        Assertions.assertEquals(65, CheckoutSolution.checkout("HHHHHHH"))
+        Assertions.assertEquals(80, CheckoutSolution.checkout("HHHHHHHHHH"))
     }
 
     @Test
@@ -77,3 +86,4 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(240, CheckoutSolution.checkout("UUUUUUUU"))
     }
 }
+

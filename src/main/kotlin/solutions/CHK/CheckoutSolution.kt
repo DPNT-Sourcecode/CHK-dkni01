@@ -63,26 +63,19 @@ object CheckoutSolution {
         )
         
         // calculating products with discounts for multiple of that item
-
-        val offerA5 = calculateOffer(
-            prices.getValue("A"), 
-            skus.count { it == 'A' } * prices.getValue("A"), 
-            5,
-            A_OFFER5
-        )
-        val offerA3 = calculateOffer(
-            prices.getValue("A"),
-            offerA5.second,
-            3,
-            A_OFFER3
-        )
-//        totalPrice += offerA5.first + offerA3.first + offerA3.second
-
+        
         totalPrice += calculateMultiplesOffer(
             "A",
             skus.count { it == 'A' },
             Pair(3, 130),
             Pair(5, 200)
+        )
+
+        totalPrice += calculateMultiplesOffer(
+            "H",
+            skus.count { it == 'H' },
+            Pair(5, 45),
+            Pair(10, 80)
         )
         
         
@@ -92,21 +85,7 @@ object CheckoutSolution {
             totalPrice += skus.count { it == sku } * prices.getValue(sku.toString())
         }
         return totalPrice
-
-        // calculating As
-//        val offerA5 = calculateOffer(
-//            prices.getValue("A"), 
-//            skus.count { it == 'A' } * prices.getValue("A"), 
-//            5,
-//            A_OFFER5
-//        )
-//        val offerA3 = calculateOffer(
-//            prices.getValue("A"),
-//            offerA5.second,
-//            3,
-//            A_OFFER3
-//        )
-//        val totalA = offerA5.first + offerA3.first + offerA3.second
+        
 //
 //        // calculating Es
 //        val offerE = calculateOffer(
@@ -189,6 +168,7 @@ object CheckoutSolution {
         return highOffer.first + lowOffer.first + lowOffer.second
     }
 }
+
 
 
 
