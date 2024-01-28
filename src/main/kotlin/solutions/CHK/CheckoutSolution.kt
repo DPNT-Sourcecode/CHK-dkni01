@@ -243,6 +243,10 @@ object CheckoutSolution {
         val countY = skus.count { it == 'Y' }
         val countZ = skus.count { it == 'Z' }
         
+        when (leftover) {
+            0 ->
+        }
+        
         if (leftover == 0) {
             return updatedSkusNew
         } else if (leftover == 1) {
@@ -254,7 +258,7 @@ object CheckoutSolution {
                     return updatedSkusNew
                 }
             }
-             
+
         } else {
             // leftover == 2
             for (char in "XSTYZ") {
@@ -266,12 +270,11 @@ object CheckoutSolution {
             }
         }
         
-//        val updatedLeftover = leftover - countX
-//        updatedSkusNew += "X".repeat(leftover)
         
         return updatedSkusNew
     }
 }
+
 
 
 
