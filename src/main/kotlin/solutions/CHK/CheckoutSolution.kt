@@ -149,11 +149,11 @@ object CheckoutSolution {
     private fun calculateOffer(
         price: Int,
         total: Int,
-        multiplier: Int,
+        requiredItems: Int,
         offer: Int
     ) : Pair<Int, Int> {
-        val leftover = total % (price * multiplier)
-        val reduced = ((total - leftover) / (price * multiplier)) * offer
+        val leftover = total % (price * requiredItems)
+        val reduced = ((total - leftover) / (price * requiredItems)) * offer
         return Pair(reduced, leftover)
     }
     
@@ -218,6 +218,14 @@ object CheckoutSolution {
         val skuPrice = prices.getValue(sku)
         val requiredItems = getOneFree[sku]
 
+//        val offerE = calculateOffer(
+//            prices.getValue("E"),
+//            skus.count { it == 'E' } * prices.getValue("E"),
+//            2,
+//            1
+//        )
+//        val adjustedBCount = skus.count { it == 'B' } - offerE.first
+
         requiredItems?.let {
             val offer = calculateOffer(
                 skuPrice,
@@ -225,6 +233,8 @@ object CheckoutSolution {
                 it.first,
                 1
             )
+            
+            val originalCountAssociatedItem = skus.count { char -> char == it.second.first() }
             
             val freeItemCount = skus.count { char -> char == it.second.first() } - offer.first
             
@@ -244,6 +254,7 @@ object CheckoutSolution {
     }
 
 }
+
 
 
 
