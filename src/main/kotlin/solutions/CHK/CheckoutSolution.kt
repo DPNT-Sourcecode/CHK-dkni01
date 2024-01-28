@@ -15,7 +15,7 @@ object CheckoutSolution {
     "H" to 10,
     "I" to 35,
     "J" to 60,
-    "K" to 80,
+    "K" to 70,
     "L" to 90,
     "M" to 15,
     "N" to 40,
@@ -23,14 +23,14 @@ object CheckoutSolution {
     "P" to 50,
     "Q" to 30,
     "R" to 50,
-    "S" to 30,
+    "S" to 20,
     "T" to 20,
     "U" to 40,
     "V" to 50,
     "W" to 20,
-    "X" to 90,
-    "Z" to 50,
-    "Y" to 10
+    "X" to 17,
+    "Y" to 20,
+    "Z" to 21
     )
 
     // each Pair is how many items must be bought to trigger the offer, and special price
@@ -210,5 +210,6 @@ object CheckoutSolution {
         return deletedSkus + adjustedSkus
     }
 }
+
 
 
