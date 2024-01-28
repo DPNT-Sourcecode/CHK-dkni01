@@ -101,12 +101,7 @@ object CheckoutSolution {
         val numBuyAny3OfferSets = (countBuyAny3OfferItems - leftover) / 3
 
         adjustedSkus = calculateBuyAny3Offer(adjustedSkus)
-//        
-//        var updatedSkusNew = adjustedSkus.replace("S", "")
-//        updatedSkusNew = updatedSkusNew.replace("T", "")
-//        updatedSkusNew = updatedSkusNew.replace("X", "")
-//        updatedSkusNew = updatedSkusNew.replace("Y", "")
-//        updatedSkusNew = updatedSkusNew.replace("Z", "")
+
         
         totalPrice += numBuyAny3OfferSets * buyAny3OfferPrice
         
@@ -248,6 +243,10 @@ object CheckoutSolution {
         val countY = skus.count { it == 'Y' }
         val countZ = skus.count { it == 'Z' }
         
+        val updatedLeftover = leftover - countX
+        updatedSkusNew += "X".repeat(leftover)
+        
         return updatedSkusNew
     }
 }
+
