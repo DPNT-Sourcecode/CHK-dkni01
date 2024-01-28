@@ -1,8 +1,7 @@
-package solutions.SUM
+package solutions.HLO
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import solutions.HLO.HelloSolution
 
 class HelloSolutionTest {
 
@@ -14,3 +13,4 @@ class HelloSolutionTest {
 
     
 }
+
