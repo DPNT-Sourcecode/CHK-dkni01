@@ -61,20 +61,27 @@ object CheckoutSolution {
             skus.count { it == 'U' },
             4
         )
+        
+        // calculating products with discounts for multiple of that item
 
-//        val offerU = calculateOffer(
-//            prices.getValue("U"),
-//            skus.count { it == 'U' } * prices.getValue("U"),
-//            4,
-//            1
-//        )
-//        val totalU = (skus.count { it == 'U' } * prices.getValue("U")) -
-//                (offerU.first * prices.getValue("U"))
-//        totalPrice += totalU
+        val offerA5 = calculateOffer(
+            prices.getValue("A"), 
+            skus.count { it == 'A' } * prices.getValue("A"), 
+            5,
+            A_OFFER5
+        )
+        val offerA3 = calculateOffer(
+            prices.getValue("A"),
+            offerA5.second,
+            3,
+            A_OFFER3
+        )
+        totalPrice += offerA5.first + offerA3.first + offerA3.second
+        
         
         // calculating basic products (no special offers)
         for (sku in "CDGIJLMOSTWXYZ") {
-            // NB make sure this doesn't go below 0
+            // TODO make sure this doesn't go below 0
             totalPrice += skus.count { it == sku } * prices.getValue(sku.toString())
         }
         return totalPrice
@@ -150,5 +157,6 @@ object CheckoutSolution {
         return total - (offerF.first * skuPrice)
     }
 }
+
 
 
