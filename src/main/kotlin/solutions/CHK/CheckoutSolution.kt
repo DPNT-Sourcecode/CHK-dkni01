@@ -211,14 +211,14 @@ object CheckoutSolution {
     ): String {
         val totalRelevantSku = skus.count { it == skuToRemove }
         val adjustedTotal = totalRelevantSku - howManyToRemove
-        val deletedSkus: String = skus.replace(skuToRemove.toString(), "")
+        val skusAllAffectedSkuRemoved: String = skus.replace(skuToRemove.toString(), "")
 
         if (adjustedTotal < 0) {
-            return deletedSkus
+            return skusAllAffectedSkuRemoved
         }
 
-        val adjustedSkus = skuToRemove.toString().repeat(adjustedTotal)
-        return deletedSkus + adjustedSkus
+        val skuToPayFor = skuToRemove.toString().repeat(adjustedTotal)
+        return skusAllAffectedSkuRemoved + skuToPayFor
     }
     
     private fun calculateBuyAny3Offer(
@@ -237,34 +237,31 @@ object CheckoutSolution {
         updatedSkusNew = updatedSkusNew.replace("Y", "")
         updatedSkusNew = updatedSkusNew.replace("Z", "")
         
-        val countS = skus.count { it == 'S' }
-        val countT = skus.count { it == 'T' }
-        val countX = skus.count { it == 'X' }
-        val countY = skus.count { it == 'Y' }
-        val countZ = skus.count { it == 'Z' }
-        
-        val allS = "S".repeat(countS)
-        val allT = "T".repeat(countT)
-        val allX = "X".repeat(countX)
-        val allY = "Y".repeat(countY)
-        val allZ = "Z".repeat(countZ)
+
+        val allS = "S".repeat(skus.count { it == 'S' })
+        val allT = "T".repeat(skus.count { it == 'T' })
+        val allX = "X".repeat(skus.count { it == 'X' })
+        val allY = "Y".repeat(skus.count { it == 'Y' })
+        val allZ = "Z".repeat(skus.count { it == 'Z' })
         
         // products in ascending price order
         val orderedOfferSkus = allX + allS + allT + allY + allZ
-        
-        
-        when (leftover) {
-            0 -> return updatedSkusNew
+
+        return when (leftover) {
+            0 -> updatedSkusNew
             1 -> {
                 updatedSkusNew += orderedOfferSkus[0]
-                return updatedSkusNew
+                updatedSkusNew
             }
+
             2 -> {
                 updatedSkusNew += orderedOfferSkus[0]
                 updatedSkusNew += orderedOfferSkus[1]
-                return updatedSkusNew
+                updatedSkusNew
             }
-            else -> return updatedSkusNew
+
+            else -> updatedSkusNew
         }
     }
 }
+
