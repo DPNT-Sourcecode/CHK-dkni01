@@ -35,8 +35,8 @@ object CheckoutSolution {
     const val B_OFFER2 = 45
     
     fun checkout(skus: String): Int {
-        if ()
-        if (skus.any { !listOf('A', 'B', 'C', 'D', 'E', 'F').contains(it) }) {
+        val filtered = skus.filter { it !in "ABCDEF" }
+        if (filtered.isNotEmpty()) {
             return -1
         }
         
@@ -109,4 +109,5 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
