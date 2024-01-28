@@ -44,11 +44,18 @@ object CheckoutSolution {
     }
     
     fun calculateAOffer(total: Int, multiplier: Int) : Pair<Int, Int> {
+        val offer: Int = if (multiplier == 3) {
+            A_OFFER3
+        } else {
+            A_OFFER5
+        }
+        
         val leftoverA = total % (PRICE_A * multiplier)
-        val offerA = ((total - leftoverA) / (PRICE_A * multiplier)) * A_OFFER3
+        val offerA = ((total - leftoverA) / (PRICE_A * multiplier)) * offer
         return Pair(offerA, leftoverA)
     }
 }
+
 
 
 
