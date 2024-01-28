@@ -41,6 +41,7 @@ class CheckoutSolutionTest {
     fun buyAnyThreeForPrice() {
         Assertions.assertEquals(40, CheckoutSolution.checkout("ST"))
         Assertions.assertEquals(45, CheckoutSolution.checkout("STX"))
+        Assertions.assertEquals(62, CheckoutSolution.checkout("ZZXX"))
     }
 
     // multiple same items tests
@@ -114,4 +115,5 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(240, CheckoutSolution.checkout("UUUUUUUU"))
     }
 }
+
 
