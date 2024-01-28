@@ -72,6 +72,13 @@ object CheckoutSolution {
         )
 
         totalPrice += calculateMultiplesOffer(
+            "B",
+            skus.count { it == 'B' },
+            Pair(2, 45),
+            null
+        )
+
+        totalPrice += calculateMultiplesOffer(
             "H",
             skus.count { it == 'H' },
             Pair(5, 45),
@@ -150,24 +157,37 @@ object CheckoutSolution {
         sku: String,
         numItems: Int,
         lowerOffer: Pair<Int, Int>,
-        higherOffer: Pair<Int, Int>
+        higherOffer: Pair<Int, Int>?
     ) : Int {
         val skuPrice = prices.getValue(sku)
-        val highOffer = calculateOffer(
-            skuPrice,
-            numItems * skuPrice,
-            higherOffer.first,
-            higherOffer.second
-        )
+        higherOffer?.let {
+            val highOffer = calculateOffer(
+                skuPrice,
+                numItems * skuPrice,
+                higherOffer.first,
+                higherOffer.second
+            )
+            val lowOffer = calculateOffer(
+                skuPrice,
+                highOffer.second,
+                lowerOffer.first,
+                lowerOffer.second
+            )
+            return highOffer.first + lowOffer.first + lowOffer.second
+        }
         val lowOffer = calculateOffer(
             skuPrice,
-            highOffer.second,
+            numItems * skuPrice,
             lowerOffer.first,
             lowerOffer.second
         )
-        return highOffer.first + lowOffer.first + lowOffer.second
+        return lowOffer.first + lowOffer.second
+        
+        
+        
     }
 }
+
 
 
 

@@ -55,10 +55,14 @@ class CheckoutSolutionTest {
     }
 
     @Test
-    fun offerBAndE() {
+    fun offerB() {
         Assertions.assertEquals(30, CheckoutSolution.checkout("B"))
         Assertions.assertEquals(45, CheckoutSolution.checkout("BB"))
+        Assertions.assertEquals(90, CheckoutSolution.checkout("BBBB"))
+    }
 
+    @Test
+    fun offerBAndE() {
         Assertions.assertEquals(40, CheckoutSolution.checkout("E"))
         Assertions.assertEquals(80, CheckoutSolution.checkout("EE"))
         Assertions.assertEquals(80, CheckoutSolution.checkout("EEB"))
@@ -86,4 +90,5 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(240, CheckoutSolution.checkout("UUUUUUUU"))
     }
 }
+
 
