@@ -234,29 +234,32 @@ object CheckoutSolution {
                 1
             )
             
-            val originalCountAssociatedItem = skus.count { char -> char == it.second.first() }
+//            val originalCountAssociatedItem = skus.count { char -> char == it.second.first() }
             val amountToSubtract = offer.first
             
-            val freeItemCount = (skus.count { char -> char == it.second.first() }) - offer.first
+//            val freeItemCount = (skus.count { char -> char == it.second.first() }) - offer.first
             
-            println("♦️ free items $freeItemCount, sku ${it.second}")
+//            println("♦️ free items $freeItemCount, sku ${it.second}")
             
             val firstRelevantSku = skus.indexOfFirst { char -> char == it.second.first() }
             println("♦️ firstSkuIndex $firstRelevantSku")
             if (firstRelevantSku == -1) {
                 return skus
             } else {
+                var newSkus = ""
                 repeat(amountToSubtract) {
-                    skus.toMutableList().removeAt(firstRelevantSku).toString()
-//                    skus.removeRange(firstRelevantSku, firstRelevantSku + 1)
+
+                    newSkus = skus.toMutableList().removeAt(firstRelevantSku).toString()
+                    
                 }
-                return skus
+                return newSkus
             }
         }
         return skus
     }
 
 }
+
 
 
 
