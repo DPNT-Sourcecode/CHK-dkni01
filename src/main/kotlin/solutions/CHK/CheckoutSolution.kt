@@ -247,8 +247,14 @@ object CheckoutSolution {
 //            
 //        }
 
-        if (leftover == countX) {
-            updatedSkusNew += "X".repeat(leftover)
+//        if (leftover == countX) {
+//            updatedSkusNew += "X".repeat(leftover)
+//        } else if ()
+        
+        if (leftover == 0) {
+            return updatedSkusNew
+        } else if (leftover == 1) {
+             
         }
         
         val updatedLeftover = leftover - countX
@@ -257,5 +263,6 @@ object CheckoutSolution {
         return updatedSkusNew
     }
 }
+
 
 
