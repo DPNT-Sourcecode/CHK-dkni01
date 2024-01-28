@@ -1,5 +1,8 @@
 package solutions.CHK
 
+/**
+ * Calculate price of items, including special offers.
+ */
 object CheckoutSolution {
     private val prices = hashMapOf(
     "A" to 50,
@@ -30,9 +33,8 @@ object CheckoutSolution {
     "Y" to 10
     )
 
-    // multiples discount A B H K P Q V
     // each Pair is how many items must be bought to trigger the offer, and special price
-    val multiplesOffers = hashMapOf(
+    private val multiplesOffers = hashMapOf(
         "A" to listOf(Pair(3, 130), Pair(5, 200)),
         "B" to listOf(Pair(2, 45), null),
         "H" to listOf(Pair(5, 45), Pair(10, 80)),
@@ -43,7 +45,7 @@ object CheckoutSolution {
     )
 
     // how many items to trigger the offer
-    val getOneFree = hashMapOf(
+    private val getOneFree = hashMapOf(
         "E" to 2,
         "F" to 3,
         "N" to 3,
@@ -63,9 +65,37 @@ object CheckoutSolution {
         
         // multiples discount A B H K P Q V
         // get one free same F U
+        
         // get one free different E N R
+        
         // basic C D G I J L M O S T W X Y Z
         // NB some basic affected by offers
+
+
+//         calculating Es
+        val offerE = calculateOffer(
+            prices.getValue("E"),
+            skus.count { it == 'E' } * prices.getValue("E"),
+            2,
+            1
+        )
+        val adjustedBCount = skus.count { it == 'B' } - offerE.first
+        
+        totalPrice += (skus.count { it == 'E' } * prices.getValue("E"))
+
+        // calculating Bs
+        val newB = calculateOffer(
+            prices.getValue("B"),
+            adjustedBCount * prices.getValue("B"),
+            2,
+            45 // change this TODO
+        )
+        val totalB = newB.first + newB.second
+        
+        totalPrice += (if (totalB <= 0) 0 else totalB)
+        
+        
+        
 
         // calculating get one free (same item)
         for (sku in "UF") {
@@ -181,36 +211,6 @@ object CheckoutSolution {
             )
             return lowOffer.first + lowOffer.second
         }
-        
-//        higherOffer?.let {
-//            val highOffer = calculateOffer(
-//                skuPrice,
-//                numItems * skuPrice,
-//                higherOffer.first,
-//                higherOffer.second
-//            )
-//            val lowOffer = calculateOffer(
-//                skuPrice,
-//                highOffer.second,
-//                lowerOffer.first,
-//                lowerOffer.second
-//            )
-//            return highOffer.first + lowOffer.first + lowOffer.second
-//        }
-//        val lowOffer = calculateOffer(
-//            skuPrice,
-//            numItems * skuPrice,
-//            lowerOffer.first,
-//            lowerOffer.second
-//        )
         return 0
-        
-        
-        
     }
 }
-
-
-
-
-
