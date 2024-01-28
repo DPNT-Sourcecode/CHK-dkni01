@@ -30,23 +30,22 @@ object CheckoutSolution {
     "Y" to 10
     )
     
-//    const val PRICE_A = 50
-//    const val PRICE_B = 30
-//    const val PRICE_C = 20
-//    const val PRICE_D = 15
-//    const val PRICE_E = 40
-//    const val PRICE_F = 10
-    
     const val A_OFFER3 = 130
     const val A_OFFER5 = 200
     const val B_OFFER2 = 45
     
     fun checkout(skus: String): Int {
+        if ()
         if (skus.any { !listOf('A', 'B', 'C', 'D', 'E', 'F').contains(it) }) {
             return -1
         }
         
 //        TODO catch NoSuchElementException errors
+//        TODO lower case SKUs?
+        
+        // multiples discount A B H K P Q V
+        // BOGOF same F U
+        // BOGOF different E N R
 
         // calculating As
         val offerA5 = calculateOffer(
@@ -110,3 +109,4 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
