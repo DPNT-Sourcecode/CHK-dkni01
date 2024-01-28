@@ -23,24 +23,32 @@ object CheckoutSolution {
             println("❗️ 5 offer ${offerA + leftoverA}")
         }
         
-        val leftoverA = numATotal % (PRICE_A * 3)
-        val offerA = ((numATotal - leftoverA) / (PRICE_A * 3)) * A_OFFER3
+        val offer5 = calculateAOffer(numATotal, 5)
+        println("❗️ 5 offer pair ${offer5}")
+        val offer3 = calculateAOffer(offer5.second, 3)
+        println("❗️ 3 offer pair ${offer3}")
+        val totalANew = offer5.first + offer3.first + offer3.second
+        println("❗️ total $totalANew")
+        
+//        val leftoverA = numATotal % (PRICE_A * 3)
+//        val offerA = ((numATotal - leftoverA) / (PRICE_A * 3)) * A_OFFER3
 
         val numBTotal = skus.count { it == 'B' } * PRICE_B
         val leftoverB = numBTotal % (PRICE_B * 2)
         val offerB = ((numBTotal - leftoverB) / (PRICE_B * 2)) * B_OFFER2
         
-        return (calculateAOffer(numATotal, 3)) + 
+        return (totalANew) + 
                 (offerB + leftoverB) + 
                 (skus.count { it == 'C' } * PRICE_C) + 
                 (skus.count { it == 'D' } * PRICE_D)
     }
     
-    fun calculateAOffer(total: Int, multiplier: Int) : Int {
+    fun calculateAOffer(total: Int, multiplier: Int) : Pair<Int, Int> {
         val leftoverA = total % (PRICE_A * multiplier)
         val offerA = ((total - leftoverA) / (PRICE_A * multiplier)) * A_OFFER3
-        return offerA + leftoverA
+        return Pair(offerA, leftoverA)
     }
 }
+
 
 
