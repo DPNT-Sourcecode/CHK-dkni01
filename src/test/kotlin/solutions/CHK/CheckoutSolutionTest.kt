@@ -18,12 +18,13 @@ class CheckoutSolutionTest {
 //        Assertions.assertEquals(250, CheckoutSolution.checkout("AAAAAA"))
 //        Assertions.assertEquals(330, CheckoutSolution.checkout("AAAAAAAA"))
 //        
-//        Assertions.assertEquals(45, CheckoutSolution.checkout("BB"))
-//        Assertions.assertEquals(220, CheckoutSolution.checkout("BBBBAAA"))
+        Assertions.assertEquals(45, CheckoutSolution.checkout("BB"))
+        Assertions.assertEquals(220, CheckoutSolution.checkout("BBBBAAA"))
         
         Assertions.assertEquals(80, CheckoutSolution.checkout("EEB"))
-        Assertions.assertEquals(95, CheckoutSolution.checkout("EEBB"))
+        Assertions.assertEquals(110, CheckoutSolution.checkout("EEBB"))
         Assertions.assertEquals(160, CheckoutSolution.checkout("EEEEBB"))
+        Assertions.assertEquals(190, CheckoutSolution.checkout("EEEEBBB"))
 //        
         Assertions.assertEquals(-1, CheckoutSolution.checkout("X"))
         Assertions.assertEquals(-1, CheckoutSolution.checkout("A9"))
@@ -31,6 +32,7 @@ class CheckoutSolutionTest {
 
     
 }
+
 
 
 
