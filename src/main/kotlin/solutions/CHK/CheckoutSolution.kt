@@ -39,6 +39,8 @@ object CheckoutSolution {
             return -1
         }
         
+        var totalPrice = 0
+        
 //        TODO catch NoSuchElementException errors
 //        TODO lower case SKUs?
         
@@ -48,11 +50,11 @@ object CheckoutSolution {
         // basic C D G I J L M O S T W X Y Z
         // NB some basic affected by offers
         
-        var basicTotal = 0
         for (char in "CDGIJLMOSTWXYZ") {
-            basicTotal += skus.count { it == char } * prices.getValue(char.toString())
+            // NB make sure this doesn't go below 0
+            totalPrice += skus.count { it == char } * prices.getValue(char.toString())
         }
-        return basicTotal
+        return totalPrice
 
         // calculating As
         val offerA5 = calculateOffer(
@@ -116,6 +118,7 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
 
 
