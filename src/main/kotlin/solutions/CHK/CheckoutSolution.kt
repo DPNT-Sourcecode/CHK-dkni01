@@ -66,7 +66,10 @@ object CheckoutSolution {
         // calculating get one free (different item)
         var adjustedSkus: String = ""
         
-        totalPrice += skus.count { it == 'E' } * prices.getValue("E")
+        val priceE = getItemPrice("E")
+        if (priceE != -1) {
+            totalPrice += skus.count { it == 'E' } * getItemPrice("E")
+        }
         adjustedSkus = removeFreeItems(skus, "E")
 
         totalPrice += skus.count { it == 'N' } * prices.getValue("N")
@@ -208,15 +211,18 @@ object CheckoutSolution {
         return deletedSkus + adjustedSkus
     }
     
-    private fun getItemPrice(sku: String) {
+    private fun getItemPrice(sku: String) : Int {
         try {
             prices.getValue(sku)
         } catch (e: NoSuchElementException) {
-            
+            println("This sku ($sku) not found in prices map. How did this even happen?")
+            println("${e.message}")
         }
+        return -1
     }
 
 }
+
 
 
 
