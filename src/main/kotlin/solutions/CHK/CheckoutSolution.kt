@@ -49,6 +49,12 @@ object CheckoutSolution {
         )
         val totalB = newB.first + newB.second
         
+        val totalC = (skus.count { it == 'C' } * PRICE_C)
+        val totalD = (skus.count { it == 'D' } * PRICE_D)
+        val totalE = (skus.count { it == 'E' } * PRICE_E)
+        
+        println("❗️ totalA $totalA, totalB $totalB, totalC $totalC, totalD $totalD, totalE $totalE")
+        
         return (totalA) + 
                 (totalB) + 
                 (skus.count { it == 'C' } * PRICE_C) + 
@@ -66,3 +72,4 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
