@@ -57,8 +57,7 @@ object CheckoutSolution {
         if (skus.any { it !in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }) {
             return -1
         }
-        
-        var adjustedSkus = skus
+
         var totalPrice = 0
         
 //        TODO catch NoSuchElementException errors
@@ -76,7 +75,7 @@ object CheckoutSolution {
 //         calculating Es
 
         totalPrice += skus.count { it == 'E' } * prices.getValue("E")
-        adjustedSkus = removeFreeItems(skus, "E")
+        var adjustedSkus: String = removeFreeItems(skus, "E")
         
         println("❗️ new skus list $adjustedSkus")
 
@@ -262,6 +261,7 @@ object CheckoutSolution {
     }
 
 }
+
 
 
 
