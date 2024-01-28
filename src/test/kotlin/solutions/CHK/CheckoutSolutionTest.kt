@@ -43,7 +43,8 @@ class CheckoutSolutionTest {
 //        Assertions.assertEquals(45, CheckoutSolution.checkout("STX"))
 //        Assertions.assertEquals(62, CheckoutSolution.checkout("ZZXX"))
 //        Assertions.assertEquals(79, CheckoutSolution.checkout("SSXXX"))
-        Assertions.assertEquals(62, CheckoutSolution.checkout("TTTZZ"))
+        Assertions.assertEquals(85, CheckoutSolution.checkout("TTTZZ"))
+        Assertions.assertEquals(85, CheckoutSolution.checkout("TTTYZ"))
     }
 
     // multiple same items tests
@@ -117,5 +118,6 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(240, CheckoutSolution.checkout("UUUUUUUU"))
     }
 }
+
 
 

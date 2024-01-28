@@ -243,17 +243,10 @@ object CheckoutSolution {
         val countY = skus.count { it == 'Y' }
         val countZ = skus.count { it == 'Z' }
         
-//        for (char in "XSTYZ") {
-//            
-//        }
-
-//        if (leftover == countX) {
-//            updatedSkusNew += "X".repeat(leftover)
-//        } else if ()
-        
         if (leftover == 0) {
             return updatedSkusNew
         } else if (leftover == 1) {
+            // products in ascending price order
             for (char in "XSTYZ") {
                 val count = skus.count { it == char }
                 if (count >= 1) {
@@ -262,14 +255,24 @@ object CheckoutSolution {
                 }
             }
              
+        } else {
+            // leftover == 2
+            for (char in "XSTYZ") {
+                val count = skus.count { it == char }
+                if (count >= 2) {
+                    updatedSkusNew += char.toString().repeat(2)
+                    return updatedSkusNew
+                }
+            }
         }
         
-        val updatedLeftover = leftover - countX
-        updatedSkusNew += "X".repeat(leftover)
+//        val updatedLeftover = leftover - countX
+//        updatedSkusNew += "X".repeat(leftover)
         
         return updatedSkusNew
     }
 }
+
 
 
 
