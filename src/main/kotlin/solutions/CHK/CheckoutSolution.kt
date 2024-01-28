@@ -225,6 +225,7 @@ object CheckoutSolution {
                 it.first,
                 1
             )
+            
             val freeItemCount = skus.count { char -> char == it.second.first() } - offer.first
             
             println("♦️ free items $freeItemCount, sku ${it.second}")
@@ -243,5 +244,6 @@ object CheckoutSolution {
     }
 
 }
+
 
 
