@@ -58,6 +58,7 @@ object CheckoutSolution {
             return -1
         }
         
+        var adjustedSkus = skus
         var totalPrice = 0
         
 //        TODO catch NoSuchElementException errors
@@ -73,35 +74,36 @@ object CheckoutSolution {
 
 
 //         calculating Es
-        val offerE = calculateOffer(
-            prices.getValue("E"),
-            skus.count { it == 'E' } * prices.getValue("E"),
-            2,
-            1
-        )
-        val adjustedBCount = skus.count { it == 'B' } - offerE.first
+//        val offerE = calculateOffer(
+//            prices.getValue("E"),
+//            skus.count { it == 'E' } * prices.getValue("E"),
+//            2,
+//            1
+//        )
+//        val adjustedBCount = skus.count { it == 'B' } - offerE.first
         
-        totalPrice += (skus.count { it == 'E' } * prices.getValue("E"))
+        totalPrice += skus.count { it == 'E' } * prices.getValue("E")
+        adjustedSkus = removeFreeItems(skus, "E")
 
-        // calculating Bs
-        val newB = calculateOffer(
-            prices.getValue("B"),
-            adjustedBCount * prices.getValue("B"),
-            2,
-            45 // change this TODO
-        )
-        val totalB = newB.first + newB.second
+//        // calculating Bs
+//        val newB = calculateOffer(
+//            prices.getValue("B"),
+//            adjustedBCount * prices.getValue("B"),
+//            2,
+//            45 // change this TODO
+//        )
+//        val totalB = newB.first + newB.second
+//        
+//        totalPrice += (if (totalB <= 0) 0 else totalB)
         
-        totalPrice += (if (totalB <= 0) 0 else totalB)
         
-        val test = removeFreeItems(skus, "E")
         
 
         // calculating get one free (same item)
         for (sku in "UF") {
             totalPrice += calculateGetOneFreeSameOffer(
                 sku.toString(),
-                skus.count { it == sku }
+                adjustedSkus.count { it == sku }
             )
         }
         
@@ -109,14 +111,14 @@ object CheckoutSolution {
         for (sku in "ABHKPQV") {
             totalPrice += calculateMultiplesOffer(
                 sku.toString(),
-                skus.count { it == sku }
+                adjustedSkus.count { it == sku }
             )
         }
         
         // calculating basic products (no special offers)
         for (sku in "CDGIJLMOSTWXYZ") {
             // TODO make sure this doesn't go below 0
-            totalPrice += skus.count { it == sku } * prices.getValue(sku.toString())
+            totalPrice += adjustedSkus.count { it == sku } * prices.getValue(sku.toString())
         }
         return totalPrice
         
@@ -230,6 +232,9 @@ object CheckoutSolution {
             )
             val adjustedBCount = skus.count { char -> char == 'B' } - offerE.first
             
+            // TODO multipleBs to remove
+            // TODO what if no Bs
+            
             val firstRelevantSku = skus.indexOfFirst { char -> char == 'B' }
             return skus.removeRange(firstRelevantSku, firstRelevantSku + 1)
         }
@@ -238,5 +243,6 @@ object CheckoutSolution {
     }
 
 }
+
 
 
