@@ -236,24 +236,31 @@ object CheckoutSolution {
             
 //            val originalCountAssociatedItem = skus.count { char -> char == it.second.first() }
             val amountToSubtract = offer.first
-            
-//            val freeItemCount = (skus.count { char -> char == it.second.first() }) - offer.first
-            
-//            println("♦️ free items $freeItemCount, sku ${it.second}")
-            
-            val firstRelevantSku = skus.indexOfFirst { char -> char == it.second.first() }
-            println("♦️ firstSkuIndex $firstRelevantSku")
-            if (firstRelevantSku == -1) {
-                return skus
-            } else {
-                var newSkus = ""
-                repeat(amountToSubtract) {
 
-                    newSkus = skus.toMutableList().removeAt(firstRelevantSku).toString()
-                    
-                }
-                return newSkus
-            }
+            val test = removeFreeItemsFromString(
+                skus,
+                it.first,
+                amountToSubtract
+            )
+            return test
+            
+////            val freeItemCount = (skus.count { char -> char == it.second.first() }) - offer.first
+//            
+////            println("♦️ free items $freeItemCount, sku ${it.second}")
+//            
+//            val firstRelevantSku = skus.indexOfFirst { char -> char == it.second.first() }
+//            println("♦️ firstSkuIndex $firstRelevantSku")
+//            if (firstRelevantSku == -1) {
+//                return skus
+//            } else {
+//                var newSkus = ""
+//                repeat(amountToSubtract) {
+//
+//                    newSkus = skus.toMutableList().removeAt(firstRelevantSku).toString()
+//                    
+//                }
+//                return newSkus
+//            }
         }
         return skus
     }
@@ -268,11 +275,12 @@ object CheckoutSolution {
         if (adjustedTotal < 0) {
             return skus
         }
-        val newSkus = skus.toMutableList().removeAll(listOf(skuToRemove))
-        val adjustedSkus = skuToRemove.toString() * adjustedTotal
-        
+        val adjustedSkus = skuToRemove.toString().repeat(adjustedTotal)
+        val newSkus = skus.toMutableList().removeAll(listOf(skuToRemove)).toString() + adjustedSkus
+        return newSkus
     }
 
 }
+
 
 
