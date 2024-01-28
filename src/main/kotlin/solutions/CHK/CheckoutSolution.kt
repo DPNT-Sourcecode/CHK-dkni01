@@ -38,7 +38,7 @@ object CheckoutSolution {
         "A" to listOf(Pair(3, 130), Pair(5, 200)),
         "B" to listOf(Pair(2, 45), null),
         "H" to listOf(Pair(5, 45), Pair(10, 80)),
-        "K" to listOf(Pair(2, 150), null),
+        "K" to listOf(Pair(2, 120), null),
         "P" to listOf(Pair(5, 200), null),
         "Q" to listOf(Pair(3, 80), null),
         "V" to listOf(Pair(2, 90), Pair(3, 130)),
@@ -93,10 +93,10 @@ object CheckoutSolution {
         // calculating basic products (no special offers)
         for (sku in "CDGIJLMOSTWXYZ") {
             // TODO make sure this doesn't go below 0
-            val priceItem = prices.getValue(sku.toString())
-            val count = adjustedSkus.count { it == sku }
-            val total = count * priceItem
-            totalPrice += adjustedSkus.count { it == sku } * priceItem
+//            val priceItem = prices.getValue(sku.toString())
+//            val count = adjustedSkus.count { it == sku }
+//            val total = count * priceItem
+            totalPrice += adjustedSkus.count { it == sku } * prices.getValue(sku.toString())
         }
         return totalPrice
     }
@@ -210,3 +210,4 @@ object CheckoutSolution {
         return deletedSkus + adjustedSkus
     }
 }
+
