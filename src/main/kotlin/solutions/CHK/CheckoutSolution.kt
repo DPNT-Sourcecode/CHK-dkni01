@@ -49,10 +49,23 @@ object CheckoutSolution {
         // BOGOF different E N R
         // basic C D G I J L M O S T W X Y Z
         // NB some basic affected by offers
+
+        // calculating BOGOF (same product)
         
-        for (char in "CDGIJLMOSTWXYZ") {
+        val offerF = calculateOffer(
+            prices.getValue("F"),
+            skus.count { it == 'F' } * prices.getValue("F"),
+            3,
+            1
+        )
+        val totalF = (skus.count { it == 'F' } * prices.getValue("F")) -
+                (offerF.first * prices.getValue("F"))
+        totalPrice += totalF
+        
+        // calculating basic products (no special offers)
+        for (sku in "CDGIJLMOSTWXYZ") {
             // NB make sure this doesn't go below 0
-            totalPrice += skus.count { it == char } * prices.getValue(char.toString())
+            totalPrice += skus.count { it == sku } * prices.getValue(sku.toString())
         }
         return totalPrice
 
@@ -89,15 +102,7 @@ object CheckoutSolution {
         )
         val totalB = newB.first + newB.second
         
-        // calculating Fs
-        val offerF = calculateOffer(
-            prices.getValue("F"),
-            skus.count { it == 'F' } * prices.getValue("F"),
-            3,
-            1
-        )
-        val totalF = (skus.count { it == 'F' } * prices.getValue("F")) - 
-                (offerF.first * prices.getValue("F"))
+        
         
         return totalA + 
                 (if (totalB <= 0) 0 else totalB) + 
@@ -118,6 +123,7 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
 
 
