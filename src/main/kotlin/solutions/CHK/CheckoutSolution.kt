@@ -94,7 +94,7 @@ object CheckoutSolution {
         
         totalPrice += (if (totalB <= 0) 0 else totalB)
         
-        
+        val test = removeFreeItems(skus, "E")
         
 
         // calculating get one free (same item)
@@ -230,11 +230,13 @@ object CheckoutSolution {
             )
             val adjustedBCount = skus.count { char -> char == 'B' } - offerE.first
             
-            val firstRelevantSku = skus.
+            val firstRelevantSku = skus.indexOfFirst { char -> char == 'B' }
+            return skus.removeRange(firstRelevantSku, firstRelevantSku + 1)
         }
         
         return skus
     }
 
 }
+
 
