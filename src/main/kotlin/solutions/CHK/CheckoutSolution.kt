@@ -225,6 +225,8 @@ object CheckoutSolution {
     ) : String {
         val skuPrice = prices.getValue(sku)
         val requiredItems = getOneFree[sku]
+        
+        var newSkus = skus
 
         requiredItems?.let {
             val offerE = calculateOffer(
@@ -242,7 +244,10 @@ object CheckoutSolution {
             if (firstRelevantSku == -1) {
                 return skus
             } else {
-                return skus.removeRange(firstRelevantSku, firstRelevantSku + 1)
+                repeat(adjustedBCount) {
+                    newSkus.removeRange(firstRelevantSku, firstRelevantSku + 1)
+                }
+                return newSkus
             }
             
         }
@@ -251,6 +256,7 @@ object CheckoutSolution {
     }
 
 }
+
 
 
 
