@@ -18,13 +18,13 @@ object CheckoutSolution {
         }
 
         // calculating As
-        val offerA5 = calculateBasicOffer(
+        val offerA5 = calculateOffer(
             PRICE_A, 
             skus.count { it == 'A' } * PRICE_A, 
             5,
             A_OFFER5
         )
-        val offerA3 = calculateBasicOffer(
+        val offerA3 = calculateOffer(
             PRICE_A,
             offerA5.second,
             3,
@@ -33,7 +33,7 @@ object CheckoutSolution {
         val totalA = offerA5.first + offerA3.first + offerA3.second
 
         // calculating Es
-        val offerE = calculateBasicOffer(
+        val offerE = calculateOffer(
             PRICE_E,
             skus.count { it == 'E' } * PRICE_E,
             2,
@@ -42,7 +42,7 @@ object CheckoutSolution {
         val adjustedBCount = skus.count { it == 'B' } - offerE.first
         
         // calculating Bs
-        val newB = calculateBasicOffer(
+        val newB = calculateOffer(
             PRICE_B,
             adjustedBCount * PRICE_B,
             2,
@@ -51,16 +51,13 @@ object CheckoutSolution {
         val totalB = newB.first + newB.second
         
         // calculating Fs
-
-        val offerF = calculateBasicOffer(
+        val offerF = calculateOffer(
             PRICE_F,
             skus.count { it == 'F' } * PRICE_F,
             3,
             1
         )
-        
-        val setsThreeF = offerF.first
-        val totalF = (skus.count { it == 'F' } * PRICE_F) - (setsThreeF * PRICE_F)
+        val totalF = (skus.count { it == 'F' } * PRICE_F) - (offerF.first * PRICE_F)
         
         return totalA + 
                 (if (totalB <= 0) 0 else totalB) + 
@@ -70,15 +67,17 @@ object CheckoutSolution {
                 totalF
     }
     
-    private fun calculateBasicOffer(price: Int,
-                                    total: Int,
-                                    multiplier: Int,
-                                    offer: Int
+    private fun calculateOffer(
+        price: Int,
+        total: Int,
+        multiplier: Int,
+        offer: Int
     ) : Pair<Int, Int> {
         val leftover = total % (price * multiplier)
         val reduced = ((total - leftover) / (price * multiplier)) * offer
         return Pair(reduced, leftover)
     }
 }
+
 
 
