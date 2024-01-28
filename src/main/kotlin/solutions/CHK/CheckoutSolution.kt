@@ -215,7 +215,7 @@ object CheckoutSolution {
         sku: String
     ) : String {
         val skuPrice = prices.getValue(sku)
-        val requiredItems = getOneFree[sku]
+        val offerDetails = getOneFree[sku]
 
 //        val offerE = calculateOffer(
 //            prices.getValue("E"),
@@ -225,11 +225,13 @@ object CheckoutSolution {
 //        )
 //        val adjustedBCount = skus.count { it == 'B' } - offerE.first
 
-        requiredItems?.let {
+        offerDetails?.let {
+            val requiredItems = it.first
+            val freeItemSku = it.second.first()
             val offer = calculateOffer(
                 skuPrice,
                 skus.count { char -> char == sku.first() } * skuPrice,
-                it.first,
+                requiredItems,
                 1
             )
             
@@ -238,7 +240,7 @@ object CheckoutSolution {
             
             return removeFreeItemsFromString(
                 skus,
-                it.second.first(),
+                freeItemSku,
                 amountToSubtract
             )
         }
@@ -261,6 +263,7 @@ object CheckoutSolution {
     }
 
 }
+
 
 
 
