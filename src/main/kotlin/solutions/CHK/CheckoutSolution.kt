@@ -72,13 +72,16 @@ object CheckoutSolution {
         // NB some basic affected by offers
 
 
-//         calculating Es
-
+        // calculating get one free (different item)
+    
         totalPrice += skus.count { it == 'E' } * prices.getValue("E")
         var adjustedSkus: String = removeFreeItems(skus, "E")
 
         totalPrice += skus.count { it == 'N' } * prices.getValue("N")
         adjustedSkus = removeFreeItems(adjustedSkus, "N")
+
+        totalPrice += skus.count { it == 'R' } * prices.getValue("R")
+        adjustedSkus = removeFreeItems(adjustedSkus, "R")
 
 
         // calculating get one free (same item)
@@ -215,5 +218,6 @@ object CheckoutSolution {
     }
 
 }
+
 
 
