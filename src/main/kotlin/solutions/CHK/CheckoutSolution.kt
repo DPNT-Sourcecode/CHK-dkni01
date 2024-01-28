@@ -62,7 +62,6 @@ object CheckoutSolution {
         var totalPrice = 0
         
 //        TODO catch NoSuchElementException errors
-//        TODO lower case SKUs?
         
         // calculating get one free (different item)
         var adjustedSkus: String = ""
@@ -208,8 +207,17 @@ object CheckoutSolution {
         val adjustedSkus = skuToRemove.toString().repeat(adjustedTotal)
         return deletedSkus + adjustedSkus
     }
+    
+    private fun getItemPrice(sku: String) {
+        try {
+            prices.getValue(sku)
+        } catch (e: NoSuchElementException) {
+            
+        }
+    }
 
 }
+
 
 
 
