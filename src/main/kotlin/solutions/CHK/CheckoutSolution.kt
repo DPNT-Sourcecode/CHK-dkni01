@@ -93,12 +93,14 @@ object CheckoutSolution {
         }
         
         // calculating buy any 3
-        adjustedSkus = calculateBuyAny3Offer(adjustedSkus)
+        
         
         val countBuyAny3OfferItems = adjustedSkus.count { it in "STXYZ" }
 
         val leftover = countBuyAny3OfferItems % 3
         val numBuyAny3OfferSets = (countBuyAny3OfferItems - leftover) / 3
+
+        adjustedSkus = calculateBuyAny3Offer(adjustedSkus)
 //        
 //        var updatedSkusNew = adjustedSkus.replace("S", "")
 //        updatedSkusNew = updatedSkusNew.replace("T", "")
@@ -249,6 +251,7 @@ object CheckoutSolution {
         return updatedSkusNew
     }
 }
+
 
 
 
