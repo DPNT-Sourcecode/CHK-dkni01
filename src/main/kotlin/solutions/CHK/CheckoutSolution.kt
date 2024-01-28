@@ -71,21 +71,26 @@ object CheckoutSolution {
         
         // calculating products with discounts for multiple of that item
         
-        
-        totalPrice += calculateMultiplesOffer(
-            "A",
-            skus.count { it == 'A' }
-        )
-
-        totalPrice += calculateMultiplesOffer(
-            "B",
-            skus.count { it == 'B' }
-        )
-
-        totalPrice += calculateMultiplesOffer(
-            "H",
-            skus.count { it == 'H' }
-        )
+        for (sku in "ABHKPQV") {
+            totalPrice += calculateMultiplesOffer(
+                sku.toString(),
+                skus.count { it == sku }
+            )
+        }
+//        totalPrice += calculateMultiplesOffer(
+//            "A",
+//            skus.count { it == 'A' }
+//        )
+//
+//        totalPrice += calculateMultiplesOffer(
+//            "B",
+//            skus.count { it == 'B' }
+//        )
+//
+//        totalPrice += calculateMultiplesOffer(
+//            "H",
+//            skus.count { it == 'H' }
+//        )
         
         
         // calculating basic products (no special offers)
@@ -211,5 +216,6 @@ object CheckoutSolution {
         
     }
 }
+
 
 
