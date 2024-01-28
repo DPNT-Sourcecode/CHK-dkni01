@@ -14,9 +14,13 @@ class SumSolutionTest {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             SumSolution.sum(200, 0)
         }
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            SumSolution.sum(50, -3)
+        }
     }
 
     
 }
+
 
 
