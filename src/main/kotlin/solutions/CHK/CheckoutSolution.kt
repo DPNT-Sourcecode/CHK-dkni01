@@ -254,6 +254,13 @@ object CheckoutSolution {
         if (leftover == 0) {
             return updatedSkusNew
         } else if (leftover == 1) {
+            for (char in "XSTYZ") {
+                val count = skus.count { it == char }
+                if (count >= 1) {
+                    updatedSkusNew += char.toString().repeat(1)
+                    return updatedSkusNew
+                }
+            }
              
         }
         
@@ -263,6 +270,7 @@ object CheckoutSolution {
         return updatedSkusNew
     }
 }
+
 
 
 
