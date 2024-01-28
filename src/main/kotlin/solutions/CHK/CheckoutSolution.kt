@@ -210,6 +210,3 @@ object CheckoutSolution {
         return deletedSkus + adjustedSkus
     }
 }
-
-
-
