@@ -76,7 +76,14 @@ object CheckoutSolution {
             3,
             A_OFFER3
         )
-        totalPrice += offerA5.first + offerA3.first + offerA3.second
+//        totalPrice += offerA5.first + offerA3.first + offerA3.second
+
+        totalPrice += calculateMultiplesOffer(
+            "A",
+            skus.count { it == 'A' },
+            Pair(3, 130),
+            Pair(5, 200)
+        )
         
         
         // calculating basic products (no special offers)
@@ -135,7 +142,6 @@ object CheckoutSolution {
         multiplier: Int,
         offer: Int
     ) : Pair<Int, Int> {
-//        val totalNew = total * price
         val leftover = total % (price * multiplier)
         val reduced = ((total - leftover) / (price * multiplier)) * offer
         return Pair(reduced, leftover)
@@ -156,7 +162,34 @@ object CheckoutSolution {
         )
         return total - (offerF.first * skuPrice)
     }
+
+    /** 
+     * Offers shown as Pairs of the number of items needed to trigger it (first),
+     *  and the reduced price (second).
+     */
+    private fun calculateMultiplesOffer(
+        sku: String,
+        numItems: Int,
+        lowerOffer: Pair<Int, Int>,
+        higherOffer: Pair<Int, Int>
+    ) : Int {
+        val skuPrice = prices.getValue(sku)
+        val highOffer = calculateOffer(
+            skuPrice,
+            numItems * skuPrice,
+            higherOffer.first,
+            higherOffer.second
+        )
+        val lowOffer = calculateOffer(
+            skuPrice,
+            highOffer.second,
+            lowerOffer.first,
+            lowerOffer.second
+        )
+        return highOffer.first + lowOffer.first + lowOffer.second
+    }
 }
+
 
 
 
