@@ -16,35 +16,42 @@ object CheckoutSolution {
         }
 
         // calculating As
-        val offerA5 = calculateAOffer(skus.count { it == 'A' } * PRICE_A, 5)
-        val offerA3 = calculateAOffer(offerA5.second, 3)
+        val offerA5 = calculateBasicOffer(
+            PRICE_A, 
+            skus.count { it == 'A' } * PRICE_A, 
+            5,
+            A_OFFER5
+        )
+        val offerA3 = calculateBasicOffer(
+            PRICE_A,
+            offerA5.second,
+            3,
+            A_OFFER3
+        )
         val totalA = offerA5.first + offerA3.first + offerA3.second
         
         // calculating Bs
-        val numBTotal = skus.count { it == 'B' } * PRICE_B
-        val leftoverB = numBTotal % (PRICE_B * 2)
-        val offerB = ((numBTotal - leftoverB) / (PRICE_B * 2)) * B_OFFER2
+        val newB = calculateBasicOffer(
+            PRICE_B,
+            skus.count { it == 'B' } * PRICE_B,
+            2,
+            B_OFFER2
+        )
+        val totalB = newB.first + newB.second
         
         return (totalA) + 
-                (offerB + leftoverB) + 
+                (totalB) + 
                 (skus.count { it == 'C' } * PRICE_C) + 
                 (skus.count { it == 'D' } * PRICE_D)
     }
     
-    private fun calculateAOffer(total: Int, multiplier: Int) : Pair<Int, Int> {
-        val offer: Int = if (multiplier == 3) {
-            A_OFFER3
-        } else {
-            A_OFFER5
-        }
-        
-        val leftoverA = total % (PRICE_A * multiplier)
-        val offerA = ((total - leftoverA) / (PRICE_A * multiplier)) * offer
-        return Pair(offerA, leftoverA)
+    private fun calculateBasicOffer(price: Int,
+                                    total: Int,
+                                    multiplier: Int,
+                                    offer: Int
+    ) : Pair<Int, Int> {
+        val leftover = total % (price * multiplier)
+        val reduced = ((total - leftover) / (price * multiplier)) * offer
+        return Pair(reduced, leftover)
     }
 }
-
-
-
-
-
