@@ -1,33 +1,33 @@
 package solutions.CHK
 
 object CheckoutSolution {
-    val prices = hashMapOf<String, Int>(
-        | A    | 50    | 3A for 130, 5A for 200 |
-    | B    | 30    | 2B for 45              |
-    | C    | 20    |                        |
-    | D    | 15    |                        |
-    | E    | 40    | 2E get one B free      |
-    | F    | 10    | 2F get one F free      |
-    | G    | 20    |                        |
-    | H    | 10    | 5H for 45, 10H for 80  |
-    | I    | 35    |                        |
-    | J    | 60    |                        |
-    | K    | 80    | 2K for 150             |
-    | L    | 90    |                        |
-    | M    | 15    |                        |
-    | N    | 40    | 3N get one M free      |
-    | O    | 10    |                        |
-    | P    | 50    | 5P for 200             |
-    | Q    | 30    | 3Q for 80              |
-    | R    | 50    | 3R get one Q free      |
-    | S    | 30    |                        |
-    | T    | 20    |                        |
-    | U    | 40    | 3U get one U free      |
-    | V    | 50    | 2V for 90, 3V for 130  |
-    | W    | 20    |                        |
-    | X    | 90    |                        |
-    | Z    | 50    |                        |
-    | Y    | 10    |                        |
+    val prices = hashMapOf(
+    "A" to 50,
+    "B" to 30,
+    "C" to 20,
+    "D" to 15,
+    "E" to 40,
+    "F" to 10,
+    "G" to 20,
+    "H" to 10,
+    "I" to 35,
+    "J" to 60,
+    "K" to 80,
+    "L" to 90,
+    "M" to 15,
+    "N" to 40,
+    "O" to 10,
+    "P" to 50,
+    "Q" to 30,
+    "R" to 50,
+    "S" to 30,
+    "T" to 20,
+    "U" to 40,
+    "V" to 50,
+    "W" to 20,
+    "X" to 90,
+    "Z" to 50,
+    "Y" to 10
     )
     
     const val PRICE_A = 50
@@ -107,3 +107,4 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
