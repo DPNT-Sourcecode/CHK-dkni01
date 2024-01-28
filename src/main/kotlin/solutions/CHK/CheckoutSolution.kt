@@ -94,6 +94,8 @@ object CheckoutSolution {
         for (sku in "CDGIJLMOSTWXYZ") {
             // TODO make sure this doesn't go below 0
             val priceItem = prices.getValue(sku.toString())
+            val count = adjustedSkus.count { it == sku }
+            val total = count * priceItem
             totalPrice += adjustedSkus.count { it == sku } * priceItem
         }
         return totalPrice
@@ -208,4 +210,5 @@ object CheckoutSolution {
         return deletedSkus + adjustedSkus
     }
 }
+
 
