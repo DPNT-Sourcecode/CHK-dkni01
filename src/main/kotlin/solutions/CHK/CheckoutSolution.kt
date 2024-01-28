@@ -60,7 +60,13 @@ object CheckoutSolution {
         )
         val totalF = (skus.count { it == 'F' } * prices.getValue("F")) -
                 (offerF.first * prices.getValue("F"))
-        totalPrice += totalF
+
+        
+        totalPrice += calculateBogofSameOffer(
+            "F",
+            skus.count { it == 'F' } * prices.getValue("F"),
+            3
+        )
 
         val offerU = calculateOffer(
             prices.getValue("U"),
@@ -132,4 +138,20 @@ object CheckoutSolution {
         val reduced = ((total - leftover) / (price * multiplier)) * offer
         return Pair(reduced, leftover)
     }
+    
+    private fun calculateBogofSameOffer(
+        sku: String,
+        total: Int,
+        requiredItems: Int,
+    ) : Int {
+        val skuPrice = prices.getValue(sku)
+        val offerF = calculateOffer(
+            skuPrice,
+            total,
+            requiredItems,
+            1
+        )
+        return total - (offerF.first * skuPrice)
+    }
 }
+
