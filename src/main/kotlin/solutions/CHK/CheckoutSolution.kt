@@ -259,11 +259,3 @@ object CheckoutSolution {
     }
 
 }
-
-
-
-
-
-
-
-
