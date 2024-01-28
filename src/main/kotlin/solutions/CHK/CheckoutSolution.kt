@@ -40,6 +40,15 @@ object CheckoutSolution {
         )
         val totalB = newB.first + newB.second
         
+        // calculating Es
+
+        val totalE = skus.count { it == 'E' } * PRICE_E
+        val leftover = totalE % (PRICE_E * 2)
+        val pairsE = (totalE - leftover) / (PRICE_E * 2)
+        
+        println("❗️ pairsE: $pairsE")
+        
+        
         return (totalA) + 
                 (totalB) + 
                 (skus.count { it == 'C' } * PRICE_C) + 
@@ -57,4 +66,5 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
