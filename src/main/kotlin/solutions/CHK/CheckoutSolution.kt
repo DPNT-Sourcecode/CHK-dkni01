@@ -16,26 +16,24 @@ object CheckoutSolution {
         val numC = skus.count { it == 'C'}
         val numD = skus.count { it == 'D'}
         
-//        if (numA > 3) {
-            val numATotal = numA * PRICE_A
-            val leftover = numATotal % 150
-            val offerA = ((numATotal-leftover) / 150) * 130
-            val newtotalA = offerA + leftover
-            println("❗️ $leftover, $offerA, $newtotalA")
-//        }
+        val numATotal = numA * PRICE_A
+        val leftoverA = numATotal % 150
+        val offerA = ((numATotal-leftoverA) / 150) * 130
+//            val newtotalA = offerA + leftoverA
+//            println("❗️ $leftoverA, $offerA, $newtotalA")
+
+        val numBTotal = numB * PRICE_B
+        val leftoverB = numBTotal % 60
+        val offerB = ((numBTotal-leftoverB) / 60) * 45
         
         
-        
-//        println("❗️ $checkAOffer")
-//        println("❗️ ${4 % 3}")
-        
-        
-        val sums = (newtotalA) + (numB * PRICE_B) + (numC * PRICE_C) + (numD * PRICE_D)
+        val sums = (offerA + leftoverA) + (offerB + leftoverB) + (numC * PRICE_C) + (numD * PRICE_D)
         return sums
         
 //        return -1
     }
 }
+
 
 
 
