@@ -14,20 +14,20 @@ class CheckoutSolutionTest {
 
     @Test
     fun basicItemsOnly() {
-//        Assertions.assertEquals(20, CheckoutSolution.checkout("C"))
-//        Assertions.assertEquals(15, CheckoutSolution.checkout("D"))
-//        Assertions.assertEquals(20, CheckoutSolution.checkout("G"))
-//        Assertions.assertEquals(35, CheckoutSolution.checkout("I"))
-//        Assertions.assertEquals(60, CheckoutSolution.checkout("J"))
-//        Assertions.assertEquals(90, CheckoutSolution.checkout("L"))
-//        Assertions.assertEquals(15, CheckoutSolution.checkout("M"))
-//        Assertions.assertEquals(10, CheckoutSolution.checkout("O"))
-//        Assertions.assertEquals(30, CheckoutSolution.checkout("S"))
-//        Assertions.assertEquals(20, CheckoutSolution.checkout("T"))
-//        Assertions.assertEquals(20, CheckoutSolution.checkout("W"))
-//        Assertions.assertEquals(90, CheckoutSolution.checkout("X"))
-//        Assertions.assertEquals(10, CheckoutSolution.checkout("Y"))
-//        Assertions.assertEquals(50, CheckoutSolution.checkout("Z"))
+        Assertions.assertEquals(20, CheckoutSolution.checkout("C"))
+        Assertions.assertEquals(15, CheckoutSolution.checkout("D"))
+        Assertions.assertEquals(20, CheckoutSolution.checkout("G"))
+        Assertions.assertEquals(35, CheckoutSolution.checkout("I"))
+        Assertions.assertEquals(60, CheckoutSolution.checkout("J"))
+        Assertions.assertEquals(90, CheckoutSolution.checkout("L"))
+        Assertions.assertEquals(15, CheckoutSolution.checkout("M"))
+        Assertions.assertEquals(10, CheckoutSolution.checkout("O"))
+        Assertions.assertEquals(30, CheckoutSolution.checkout("S"))
+        Assertions.assertEquals(20, CheckoutSolution.checkout("T"))
+        Assertions.assertEquals(20, CheckoutSolution.checkout("W"))
+        Assertions.assertEquals(90, CheckoutSolution.checkout("X"))
+        Assertions.assertEquals(10, CheckoutSolution.checkout("Y"))
+        Assertions.assertEquals(50, CheckoutSolution.checkout("Z"))
         
     }
 
@@ -68,4 +68,5 @@ class CheckoutSolutionTest {
         Assertions.assertEquals(40, CheckoutSolution.checkout("FFFFFF"))
     }
 }
+
 

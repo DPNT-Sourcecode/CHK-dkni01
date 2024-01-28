@@ -35,8 +35,7 @@ object CheckoutSolution {
     const val B_OFFER2 = 45
     
     fun checkout(skus: String): Int {
-        val filtered = skus.filter { it !in "ABCDEF" }
-        if (filtered.isNotEmpty()) {
+        if (skus.any { it !in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }) {
             return -1
         }
         
@@ -46,6 +45,14 @@ object CheckoutSolution {
         // multiples discount A B H K P Q V
         // BOGOF same F U
         // BOGOF different E N R
+        // basic C D G I J L M O S T W X Y Z
+        // NB some basic affected by offers
+        
+        var basicTotal = 0
+        for (char in "CDGIJLMOSTWXYZ") {
+            basicTotal += skus.count { it == char } * prices.getValue(char.toString())
+        }
+        return basicTotal
 
         // calculating As
         val offerA5 = calculateOffer(
@@ -109,5 +116,6 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
 
