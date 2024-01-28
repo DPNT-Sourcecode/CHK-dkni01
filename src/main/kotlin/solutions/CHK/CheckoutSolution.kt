@@ -61,15 +61,12 @@ object CheckoutSolution {
 
         var totalPrice = 0
         
-//        TODO catch NoSuchElementException errors
-        
         // calculating get one free (different item)
         var adjustedSkus: String = ""
         
-        val priceE = getItemPrice("E")
-        if (priceE != -1) {
-            totalPrice += skus.count { it == 'E' } * getItemPrice("E")
-        }
+        // NB map.getValue() risks a NoSuchElementException if the key doesn't exist
+        // could add try/catch later
+        totalPrice += skus.count { it == 'E' } * prices.getValue("E")
         adjustedSkus = removeFreeItems(skus, "E")
 
         totalPrice += skus.count { it == 'N' } * prices.getValue("N")
@@ -210,18 +207,8 @@ object CheckoutSolution {
         val adjustedSkus = skuToRemove.toString().repeat(adjustedTotal)
         return deletedSkus + adjustedSkus
     }
-    
-    private fun getItemPrice(sku: String) : Int {
-        try {
-            prices.getValue(sku)
-        } catch (e: NoSuchElementException) {
-            println("This sku ($sku) not found in prices map. How did this even happen?")
-            println("${e.message}")
-        }
-        return -1
-    }
-
 }
+
 
 
 
