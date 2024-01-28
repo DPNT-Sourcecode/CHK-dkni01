@@ -6,13 +6,14 @@ object CheckoutSolution {
     const val PRICE_C = 20
     const val PRICE_D = 15
     const val PRICE_E = 40
+    const val PRICE_F = 10
     
     const val A_OFFER3 = 130
     const val A_OFFER5 = 200
     const val B_OFFER2 = 45
     
     fun checkout(skus: String): Int {
-        if (skus.any { !listOf('A', 'B', 'C', 'D', 'E').contains(it) }) {
+        if (skus.any { !listOf('A', 'B', 'C', 'D', 'E', 'F').contains(it) }) {
             return -1
         }
 
@@ -53,7 +54,8 @@ object CheckoutSolution {
                 (if (totalB <= 0) 0 else totalB) + 
                 (skus.count { it == 'C' } * PRICE_C) + 
                 (skus.count { it == 'D' } * PRICE_D) +
-                (skus.count { it == 'E' } * PRICE_E)
+                (skus.count { it == 'E' } * PRICE_E) +
+                (skus.count { it == 'F' } * PRICE_F)
     }
     
     private fun calculateBasicOffer(price: Int,
@@ -66,5 +68,3 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
-
-
