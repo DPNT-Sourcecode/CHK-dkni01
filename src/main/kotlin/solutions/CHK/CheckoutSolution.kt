@@ -1,6 +1,8 @@
 package solutions.CHK
 
 object CheckoutSolution {
+    val prices = HashMap()
+    
     const val PRICE_A = 50
     const val PRICE_B = 30
     const val PRICE_C = 20
@@ -78,6 +80,7 @@ object CheckoutSolution {
         return Pair(reduced, leftover)
     }
 }
+
 
 
 
