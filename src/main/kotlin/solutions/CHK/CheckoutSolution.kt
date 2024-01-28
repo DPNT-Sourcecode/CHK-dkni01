@@ -213,4 +213,28 @@ object CheckoutSolution {
         }
         return 0
     }
+    
+    private fun removeFreeItems(
+        skus: String,
+        sku: String
+    ) : String {
+        val skuPrice = prices.getValue(sku)
+        val requiredItems = getOneFree[sku]
+
+        requiredItems?.let {
+            val offerE = calculateOffer(
+                skuPrice,
+                skus.count { char -> char == 'E' } * skuPrice,
+                it,
+                1
+            )
+            val adjustedBCount = skus.count { char -> char == 'B' } - offerE.first
+            
+            val firstRelevantSku = skus.
+        }
+        
+        return skus
+    }
+
 }
+
