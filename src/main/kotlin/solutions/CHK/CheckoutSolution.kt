@@ -257,5 +257,19 @@ object CheckoutSolution {
         }
         return skus
     }
+    
+    private fun removeFreeItemsFromString(
+        skus: String,
+        skuToRemove: Char,
+        howManyToRemove: Int
+    ) : String {
+        val totalRelevantSku = skus.count { it == skuToRemove }
+        val adjustedTotal = totalRelevantSku - howManyToRemove
+        if (adjustedTotal < 0) {
+            return skus
+        }
+        skus.toMutableList().removeAll(skuToRemove)
+    }
 
 }
+
