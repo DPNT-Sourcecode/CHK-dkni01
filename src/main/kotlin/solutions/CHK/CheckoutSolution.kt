@@ -237,36 +237,30 @@ object CheckoutSolution {
         updatedSkusNew = updatedSkusNew.replace("Y", "")
         updatedSkusNew = updatedSkusNew.replace("Z", "")
         
-//        val countS = skus.count { it == 'S' }
-//        val countT = skus.count { it == 'T' }
-//        val countX = skus.count { it == 'X' }
-//        val countY = skus.count { it == 'Y' }
-//        val countZ = skus.count { it == 'Z' }
+        val countS = skus.count { it == 'S' }
+        val countT = skus.count { it == 'T' }
+        val countX = skus.count { it == 'X' }
+        val countY = skus.count { it == 'Y' }
+        val countZ = skus.count { it == 'Z' }
+        
+        val allS = "S".repeat(countS)
+        val allT = "S".repeat(countT)
+        val allX = "S".repeat(countX)
+        val allY = "S".repeat(countY)
+        val allZ = "S".repeat(countZ)
+        
+        // products in ascending price order
+        val orderedOfferSkus = allX + allS + allT + allY + allZ
+        
         
         when (leftover) {
             0 -> return updatedSkusNew
             1 -> {
-                // products in ascending price order
-                for (char in "XSTYZ") {
-                    val count = skus.count { it == char }
-                    if (count >= 1) {
-                        updatedSkusNew += char.toString().repeat(leftover)
-                        return updatedSkusNew
-                    }
-                }
+                updatedSkusNew += orderedOfferSkus[0]
             }
             2 -> {
-                for (char in "XSTYZ") {
-                    val count = skus.count { it == char }
-                    if (count >= 2) {
-                        updatedSkusNew += char.toString().repeat(leftover)
-                        return updatedSkusNew
-                    } else {
-                        
-                    }
-                    
-                    
-                }
+                updatedSkusNew += orderedOfferSkus[0]
+                updatedSkusNew += orderedOfferSkus[1]
             }
             else -> return updatedSkusNew
         }
@@ -274,3 +268,4 @@ object CheckoutSolution {
         return updatedSkusNew
     }
 }
+
