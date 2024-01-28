@@ -16,10 +16,11 @@ object CheckoutSolution {
         val numC = skus.count { it == 'C'}
         val numD = skus.count { it == 'D'}
         
-        val checkAOffer = numA % 3
+        val numATotal = numA * PRICE_A
         
-        println("❗️ $checkAOffer")
-        println("❗️ ${4 % 3}")
+        
+//        println("❗️ $checkAOffer")
+//        println("❗️ ${4 % 3}")
         
         if (numA > 3) {
             numA = (numA - 150) + 130
@@ -31,5 +32,6 @@ object CheckoutSolution {
 //        return -1
     }
 }
+
 
 
