@@ -5,4 +5,3 @@ object HelloSolution {
         return "Hello World!"
     }
 }
-
