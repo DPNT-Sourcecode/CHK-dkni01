@@ -90,12 +90,13 @@ object CheckoutSolution {
             )
         }
         
+        // calculating buy any 3
+        val countCollectionOffer
+        val leftover = total % (price * requiredItems)
+        
+        
         // calculating basic products (no special offers)
         for (sku in "CDGIJLMOSTWXYZ") {
-            // TODO make sure this doesn't go below 0
-//            val priceItem = prices.getValue(sku.toString())
-//            val count = adjustedSkus.count { it == sku }
-//            val total = count * priceItem
             totalPrice += adjustedSkus.count { it == sku } * prices.getValue(sku.toString())
         }
         return totalPrice
@@ -210,4 +211,5 @@ object CheckoutSolution {
         return deletedSkus + adjustedSkus
     }
 }
+
 
